@@ -1,16 +1,16 @@
 export const metadata = {
-  title: 'Frontend Mentor | Interactive comments section',
-  description: 'Interactive comments section built with Next.js',
+    title: 'Frontend Mentor | Interactive comments section',
+    description: 'Interactive comments section built with Next.js',
 }
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode
 }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  )
+    return (
+        <html lang="en">
+            <body>{children}</body>
+        </html>
+    )
 }
