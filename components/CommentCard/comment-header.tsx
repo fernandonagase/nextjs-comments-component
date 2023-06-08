@@ -1,11 +1,19 @@
 import Avatar from '../Avatar'
+import Author from './types/author'
 
-export default function CommentHeader() {
+type CommentHeaderProps = {
+    author: Author
+    publishedAt: string
+}
+
+export default function CommentHeader(props: CommentHeaderProps) {
+    const { author, publishedAt } = props
+
     return (
         <header>
-            <Avatar pictureUrl="images/avatars/image-amyrobson.png" />
-            <span>amyrobson</span>
-            <span>1 month ago</span>
+            <Avatar pictureUrl={author.avatarUrl} />
+            <span>{author.username}</span>
+            <span>{publishedAt}</span>
         </header>
     )
 }
