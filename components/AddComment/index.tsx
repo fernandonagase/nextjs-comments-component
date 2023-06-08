@@ -11,7 +11,7 @@ export default function AddComment() {
                 ></textarea>
             </div>
             <div>
-                <Avatar />
+                <Avatar pictureUrl="images/avatars/image-amyrobson.png" />
                 <button type="submit">Send</button>
             </div>
         </form>
