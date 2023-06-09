@@ -1,8 +1,8 @@
-type CountControlProps = {
+type ScoreControlProps = {
     count: number
 }
 
-export default function CountControl(props: CountControlProps) {
+export default function ScoreControl(props: ScoreControlProps) {
     return (
         <div>
             <button type="button" aria-label="Acrescentar 1">

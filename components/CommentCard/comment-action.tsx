@@ -1,4 +1,4 @@
-import CountControl from '../CountControl'
+import ScoreControl from '../ScoreControl'
 
 type CommentActionProps = {
     score: number
@@ -7,7 +7,7 @@ type CommentActionProps = {
 export default function CommentAction(props: CommentActionProps) {
     return (
         <div>
-            <CountControl count={props.score} />
+            <ScoreControl count={props.score} />
             <button type="button">Reply</button>
         </div>
     )
