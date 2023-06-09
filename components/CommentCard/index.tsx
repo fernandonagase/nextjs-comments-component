@@ -8,16 +8,24 @@ type CommentCardProps = {
     author: Author
     score: number
     publishedAt: string
+    isOwnedByUser?: boolean
 }
 
 export default function CommentCard(props: CommentCardProps) {
-    const { body, score, author, publishedAt } = props
+    const { isOwnedByUser = false, ...comment } = props
 
     return (
         <article>
-            <CommentHeader author={author} publishedAt={publishedAt} />
-            <CommentBody content={body} />
-            <CommentAction score={score} />
+            <CommentHeader
+                author={comment.author}
+                publishedAt={comment.publishedAt}
+                isOwnedByUser={isOwnedByUser}
+            />
+            <CommentBody content={comment.body} />
+            <CommentAction
+                score={comment.score}
+                isOwnedByUser={isOwnedByUser}
+            />
         </article>
     )
 }

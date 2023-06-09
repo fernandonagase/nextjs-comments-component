@@ -29,6 +29,16 @@ export default function CommentSection() {
                     }}
                     score={commentData.score}
                     publishedAt={commentData.createdAt}
+                    isOwnedByUser
+                />
+                <CommentCard
+                    body={commentData.content}
+                    author={{
+                        username: commentData.user.username,
+                        avatarUrl: commentData.user.image.png,
+                    }}
+                    score={commentData.score}
+                    publishedAt={commentData.createdAt}
                 />
             </div>
             <AddComment />
