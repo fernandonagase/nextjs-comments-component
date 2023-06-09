@@ -1,3 +1,4 @@
+import IconButton from '../IconButton'
 import ScoreControl from '../ScoreControl'
 
 type CommentActionProps = {
@@ -12,11 +13,17 @@ export default function CommentAction(props: CommentActionProps) {
             <ScoreControl count={score} />
             {isOwnedByUser ? (
                 <div>
-                    <button type="button">Delete</button>
-                    <button type="button">Edit</button>
+                    <IconButton type="button" iconUrl="images/icon-delete.svg">
+                        Delete
+                    </IconButton>
+                    <IconButton type="button" iconUrl="images/icon-edit.svg">
+                        Edit
+                    </IconButton>
                 </div>
             ) : (
-                <button type="button">Reply</button>
+                <IconButton type="button" iconUrl="images/icon-reply.svg">
+                    Reply
+                </IconButton>
             )}
         </div>
     )
