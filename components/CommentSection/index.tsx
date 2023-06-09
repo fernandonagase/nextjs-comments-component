@@ -1,5 +1,6 @@
 import AddComment from '../AddComment'
 import CommentCard from '../CommentCard'
+import Modal from '../Modal'
 
 const commentData = {
     id: 1,
@@ -42,6 +43,7 @@ export default function CommentSection() {
                 />
             </div>
             <AddComment />
+            <Modal />
         </section>
     )
 }
