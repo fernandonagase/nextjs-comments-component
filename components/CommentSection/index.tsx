@@ -1,10 +1,10 @@
 import AddComment from '../AddComment'
-import CommentCard from '../CommentCard'
 import Modal from '../Modal'
-import Comment from './types/comment'
+import CommentType from '../Comment/types/comment'
+import Comment from '../Comment'
 
 type CommentSectionProps = {
-    comments: Comment[]
+    comments: CommentType[]
 }
 
 export default function CommentSection(props: CommentSectionProps) {
@@ -12,13 +12,7 @@ export default function CommentSection(props: CommentSectionProps) {
         <section>
             <div>
                 {props.comments.map((comment) => (
-                    <CommentCard
-                        body={comment.content}
-                        author={comment.user}
-                        score={comment.score}
-                        publishedAt={comment.createdAt}
-                        key={comment.id}
-                    />
+                    <Comment comment={comment} key={comment.id} />
                 ))}
             </div>
             <AddComment />
