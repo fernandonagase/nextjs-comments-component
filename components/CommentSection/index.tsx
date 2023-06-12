@@ -1,22 +1,31 @@
-import AddComment from '../AddComment'
-import Modal from '../Modal'
+'use client'
+
+import { useEffect, useState } from 'react'
+
 import CommentType from '../Comment/types/comment'
-import Comment from '../Comment'
+import CommentComponent from '../CommentComponent'
+import { getComments } from '@/lib/comment'
 
-type CommentSectionProps = {
-    comments: CommentType[]
-}
+export default function CommentSection() {
+    const [comments, setComments] = useState<CommentType[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
-export default function CommentSection(props: CommentSectionProps) {
+    useEffect(() => {
+        async function fetchComments() {
+            setIsLoading(true)
+            setComments(await getComments())
+            setIsLoading(false)
+        }
+        fetchComments()
+    }, [])
+
     return (
         <section>
-            <div>
-                {props.comments.map((comment) => (
-                    <Comment comment={comment} key={comment.id} />
-                ))}
-            </div>
-            <AddComment />
-            <Modal />
+            {isLoading ? (
+                <p>Carregando comentários...</p>
+            ) : (
+                <CommentComponent comments={comments} />
+            )}
         </section>
     )
 }
