@@ -7,7 +7,7 @@ type CommentBodyProps = {
 
 export default function CommentBody(props: CommentBodyProps) {
     return (
-        <div>
+        <p>
             {props.replyingTo ? (
                 <ReplyComment
                     username={props.replyingTo}
@@ -16,6 +16,6 @@ export default function CommentBody(props: CommentBodyProps) {
             ) : (
                 props.content
             )}
-        </div>
+        </p>
     )
 }
