@@ -9,6 +9,7 @@ type CommentCardProps = {
     score: number
     publishedAt: string
     isOwnedByUser?: boolean
+    replyingTo?: string
 }
 
 export default function CommentCard(props: CommentCardProps) {
@@ -21,7 +22,10 @@ export default function CommentCard(props: CommentCardProps) {
                 publishedAt={comment.publishedAt}
                 isOwnedByUser={isOwnedByUser}
             />
-            <CommentBody content={comment.body} />
+            <CommentBody
+                content={comment.body}
+                replyingTo={comment.replyingTo}
+            />
             <CommentAction
                 score={comment.score}
                 isOwnedByUser={isOwnedByUser}

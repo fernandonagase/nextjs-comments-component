@@ -24,6 +24,7 @@ export default function Comment(props: CommentProps) {
                             author={reply.user}
                             score={reply.score}
                             publishedAt={reply.createdAt}
+                            replyingTo={reply.replyingTo}
                             key={reply.id}
                         />
                     ))}
