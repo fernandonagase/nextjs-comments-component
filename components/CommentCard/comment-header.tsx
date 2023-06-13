@@ -1,9 +1,9 @@
 import Avatar from '../Avatar'
 import Tag from '../Tag'
-import Author from './types/author'
+import User from '../CommentComponent/types/user'
 
 type CommentHeaderProps = {
-    author: Author
+    author: User
     publishedAt: string
     isOwnedByUser: boolean
 }

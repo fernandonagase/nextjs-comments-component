@@ -2,10 +2,13 @@ import Comment from './types/comment'
 import CommentsData from './types/comments-data'
 import User from './types/user'
 
-export async function getComments() {
+export async function getData() {
     const data = await fetch('/api/comments')
     const json: CommentsData = await data.json()
-    return json.comments.map(adaptComment)
+    return {
+        currentUser: mapUser(json.currentUser),
+        comments: json.comments.map(adaptComment),
+    }
 }
 
 function adaptComment(comment: Comment) {

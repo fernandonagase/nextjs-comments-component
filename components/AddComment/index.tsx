@@ -1,6 +1,11 @@
 import Avatar from '../Avatar'
+import User from '../CommentComponent/types/user'
 
-export default function AddComment() {
+type AddCommentProps = {
+    currentUser: User
+}
+
+export default function AddComment(props: AddCommentProps) {
     return (
         <form>
             <div>
@@ -11,7 +16,7 @@ export default function AddComment() {
                 ></textarea>
             </div>
             <div>
-                <Avatar pictureUrl="images/avatars/image-amyrobson.png" />
+                <Avatar pictureUrl={props.currentUser.avatarUrl} />
                 <button type="submit">Send</button>
             </div>
         </form>

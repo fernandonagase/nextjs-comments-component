@@ -3,6 +3,7 @@ import { useState } from 'react'
 import AddComment from '../AddComment'
 import BaseComment from './types/base-comment'
 import CommentCard from '../CommentCard'
+import { useCurrentUser } from '../CommentComponent/user-context'
 
 type CommentProps = {
     comment: BaseComment
@@ -11,7 +12,9 @@ type CommentProps = {
 
 export default function Comment(props: CommentProps) {
     const { comment, replyingTo } = props
+
     const [isReplying, setIsReplying] = useState(false)
+    const currentUser = useCurrentUser()
 
     function handleReply() {
         setIsReplying((prev) => !prev)
@@ -28,7 +31,7 @@ export default function Comment(props: CommentProps) {
                 onReply={handleReply}
                 key={comment.id}
             />
-            {isReplying && <AddComment />}
+            {isReplying && <AddComment currentUser={currentUser} />}
         </div>
     )
 }

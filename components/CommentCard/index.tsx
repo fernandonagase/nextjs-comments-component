@@ -1,20 +1,23 @@
 import CommentAction from './comment-action'
 import CommentBody from './comment-body'
 import CommentHeader from './comment-header'
-import Author from './types/author'
+import User from '../CommentComponent/types/user'
+import { useCurrentUser } from '../CommentComponent/user-context'
 
 type CommentCardProps = {
     body: string
-    author: Author
+    author: User
     score: number
     publishedAt: string
-    isOwnedByUser?: boolean
     replyingTo?: string
     onReply: () => void
 }
 
 export default function CommentCard(props: CommentCardProps) {
-    const { isOwnedByUser = false, onReply, ...comment } = props
+    const { onReply, ...comment } = props
+
+    const currentUser = useCurrentUser()
+    const isOwnedByUser = currentUser.username === props.author.username
 
     return (
         <article>

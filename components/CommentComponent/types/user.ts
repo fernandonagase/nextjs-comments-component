@@ -1,6 +1,6 @@
-interface Author {
+interface User {
     username: string
     avatarUrl: string
 }
 
-export default Author
+export default User
