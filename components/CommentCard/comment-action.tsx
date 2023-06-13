@@ -4,10 +4,11 @@ import ScoreControl from '../ScoreControl'
 type CommentActionProps = {
     score: number
     isOwnedByUser: boolean
+    onReply: () => void
 }
 
 export default function CommentAction(props: CommentActionProps) {
-    const { score, isOwnedByUser } = props
+    const { score, isOwnedByUser, onReply } = props
     return (
         <div>
             <ScoreControl count={score} />
@@ -21,7 +22,11 @@ export default function CommentAction(props: CommentActionProps) {
                     </IconButton>
                 </div>
             ) : (
-                <IconButton type="button" iconUrl="images/icon-reply.svg">
+                <IconButton
+                    type="button"
+                    onClick={onReply}
+                    iconUrl="images/icon-reply.svg"
+                >
                     Reply
                 </IconButton>
             )}

@@ -1,7 +1,7 @@
 import AddComment from '../AddComment'
 import Modal from '../Modal'
 import CommentType from '../Comment/types/comment'
-import Comment from '../Comment'
+import CommentThread from '../CommentThread'
 
 type CommentComponentProps = {
     comments: CommentType[]
@@ -12,7 +12,7 @@ export default function CommentComponent(props: CommentComponentProps) {
         <div>
             <div>
                 {props.comments.map((comment) => (
-                    <Comment comment={comment} key={comment.id} />
+                    <CommentThread comment={comment} key={comment.id} />
                 ))}
             </div>
             <AddComment />

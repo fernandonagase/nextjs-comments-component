@@ -1,12 +1,22 @@
+import { useState } from 'react'
+
+import AddComment from '../AddComment'
+import BaseComment from './types/base-comment'
 import CommentCard from '../CommentCard'
-import CommentType from './types/comment'
 
 type CommentProps = {
-    comment: CommentType
+    comment: BaseComment
+    replyingTo?: string
 }
 
 export default function Comment(props: CommentProps) {
-    const { comment } = props
+    const { comment, replyingTo } = props
+    const [isReplying, setIsReplying] = useState(false)
+
+    function handleReply() {
+        setIsReplying((prev) => !prev)
+    }
+
     return (
         <div>
             <CommentCard
@@ -14,22 +24,11 @@ export default function Comment(props: CommentProps) {
                 author={comment.user}
                 score={comment.score}
                 publishedAt={comment.createdAt}
+                replyingTo={replyingTo}
+                onReply={handleReply}
                 key={comment.id}
             />
-            {comment.replies.length > 0 && (
-                <div>
-                    {comment.replies.map((reply) => (
-                        <CommentCard
-                            body={reply.content}
-                            author={reply.user}
-                            score={reply.score}
-                            publishedAt={reply.createdAt}
-                            replyingTo={reply.replyingTo}
-                            key={reply.id}
-                        />
-                    ))}
-                </div>
-            )}
+            {isReplying && <AddComment />}
         </div>
     )
 }

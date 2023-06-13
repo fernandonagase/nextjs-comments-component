@@ -10,10 +10,11 @@ type CommentCardProps = {
     publishedAt: string
     isOwnedByUser?: boolean
     replyingTo?: string
+    onReply: () => void
 }
 
 export default function CommentCard(props: CommentCardProps) {
-    const { isOwnedByUser = false, ...comment } = props
+    const { isOwnedByUser = false, onReply, ...comment } = props
 
     return (
         <article>
@@ -29,6 +30,7 @@ export default function CommentCard(props: CommentCardProps) {
             <CommentAction
                 score={comment.score}
                 isOwnedByUser={isOwnedByUser}
+                onReply={onReply}
             />
         </article>
     )
