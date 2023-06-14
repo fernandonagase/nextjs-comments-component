@@ -2,6 +2,7 @@ import IconButton from '../IconButton'
 import ScoreControl from '../ScoreControl'
 
 type CommentActionProps = {
+    commentId: number
     score: number
     isOwnedByUser: boolean
     isReplying: boolean
@@ -9,7 +10,7 @@ type CommentActionProps = {
 }
 
 export default function CommentAction(props: CommentActionProps) {
-    const { score, isOwnedByUser, isReplying, onReply } = props
+    const { commentId, score, isOwnedByUser, isReplying, onReply } = props
     return (
         <div>
             <ScoreControl count={score} />
@@ -26,7 +27,8 @@ export default function CommentAction(props: CommentActionProps) {
                 <IconButton
                     type="button"
                     onClick={onReply}
-                    aria-pressed={isReplying}
+                    aria-expanded={isReplying}
+                    aria-controls={`reply-comment-${commentId}`}
                     iconUrl="images/icon-reply.svg"
                 >
                     Reply

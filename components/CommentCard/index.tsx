@@ -5,6 +5,7 @@ import User from '../CommentComponent/types/user'
 import { useCurrentUser } from '../CommentComponent/user-context'
 
 type CommentCardProps = {
+    id: number
     body: string
     author: User
     score: number
@@ -32,6 +33,7 @@ export default function CommentCard(props: CommentCardProps) {
                 replyingTo={comment.replyingTo}
             />
             <CommentAction
+                commentId={comment.id}
                 score={comment.score}
                 isOwnedByUser={isOwnedByUser}
                 isReplying={isReplying}

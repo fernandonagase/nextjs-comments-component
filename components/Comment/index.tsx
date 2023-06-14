@@ -23,6 +23,7 @@ export default function Comment(props: CommentProps) {
     return (
         <div>
             <CommentCard
+                id={comment.id}
                 body={comment.content}
                 author={comment.user}
                 score={comment.score}
@@ -32,7 +33,11 @@ export default function Comment(props: CommentProps) {
                 onReply={handleReply}
                 key={comment.id}
             />
-            {isReplying && <AddComment currentUser={currentUser} />}
+            {isReplying && (
+                <div id={`reply-comment-${comment.id}`}>
+                    <AddComment currentUser={currentUser} />
+                </div>
+            )}
         </div>
     )
 }
