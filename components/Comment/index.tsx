@@ -16,7 +16,7 @@ export default function Comment(props: CommentProps) {
     const [isReplying, setIsReplying] = useState(false)
     const currentUser = useCurrentUser()
 
-    function handleReply() {
+    function handleToggleReply() {
         setIsReplying((prev) => !prev)
     }
 
@@ -30,7 +30,7 @@ export default function Comment(props: CommentProps) {
                 publishedAt={comment.createdAt}
                 replyingTo={replyingTo}
                 isReplying={isReplying}
-                onReply={handleReply}
+                onToggleReply={handleToggleReply}
                 key={comment.id}
             />
             {isReplying && (

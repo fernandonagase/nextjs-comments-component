@@ -12,11 +12,11 @@ type CommentCardProps = {
     publishedAt: string
     replyingTo?: string
     isReplying: boolean
-    onReply: () => void
+    onToggleReply: () => void
 }
 
 export default function CommentCard(props: CommentCardProps) {
-    const { onReply, isReplying, ...comment } = props
+    const { onToggleReply, isReplying, ...comment } = props
 
     const currentUser = useCurrentUser()
     const isOwnedByUser = currentUser.username === props.author.username
@@ -37,7 +37,7 @@ export default function CommentCard(props: CommentCardProps) {
                 score={comment.score}
                 isOwnedByUser={isOwnedByUser}
                 isReplying={isReplying}
-                onReply={onReply}
+                onToggleReply={onToggleReply}
             />
         </article>
     )
