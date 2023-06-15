@@ -4,6 +4,8 @@ import AddComment from '../AddComment'
 import BaseComment from './types/base-comment'
 import CommentCard from '../CommentCard'
 import { useCurrentUser } from '../CommentComponent/user-context'
+import useModal from '../Modal/hooks/useModal'
+import Modal from '../Modal'
 
 type CommentProps = {
     comment: BaseComment
@@ -14,30 +16,61 @@ export default function Comment(props: CommentProps) {
     const { comment, replyingTo } = props
 
     const [isReplying, setIsReplying] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const deleteModal = useModal()
     const currentUser = useCurrentUser()
 
     function handleToggleReply() {
         setIsReplying((prev) => !prev)
     }
 
+    function handleToggleEdit() {
+        setIsEditing((prev) => !prev)
+    }
+
     return (
-        <div>
-            <CommentCard
-                id={comment.id}
-                body={comment.content}
-                author={comment.user}
-                score={comment.score}
-                publishedAt={comment.createdAt}
-                replyingTo={replyingTo}
-                isReplying={isReplying}
-                onToggleReply={handleToggleReply}
-                key={comment.id}
-            />
-            {isReplying && (
-                <div id={`reply-comment-${comment.id}`}>
-                    <AddComment currentUser={currentUser} />
+        <>
+            <div>
+                <CommentCard
+                    id={comment.id}
+                    body={comment.content}
+                    author={comment.user}
+                    score={comment.score}
+                    publishedAt={comment.createdAt}
+                    replyingTo={replyingTo}
+                    isReplying={isReplying}
+                    isEditing={isEditing}
+                    onToggleReply={handleToggleReply}
+                    onToggleEdit={handleToggleEdit}
+                    onToggleDelete={() => {
+                        deleteModal.open()
+                    }}
+                    key={comment.id}
+                />
+                {isReplying && (
+                    <div id={`reply-comment-${comment.id}`}>
+                        <AddComment currentUser={currentUser} />
+                    </div>
+                )}
+            </div>
+            <Modal isOpen={deleteModal.isOpen}>
+                <p>Delete comment</p>
+                <p>
+                    Are you sure you want to delete this comment? This will
+                    remove the comment and can&apos;t be undone.
+                </p>
+                <div>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            deleteModal.close()
+                        }}
+                    >
+                        No, cancel
+                    </button>
+                    <button type="button">Yes, delete</button>
                 </div>
-            )}
-        </div>
+            </Modal>
+        </>
     )
 }

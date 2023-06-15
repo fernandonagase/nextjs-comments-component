@@ -11,12 +11,22 @@ type CommentCardProps = {
     score: number
     publishedAt: string
     replyingTo?: string
-    isReplying: boolean
+    isReplying?: boolean
+    isEditing?: boolean
     onToggleReply: () => void
+    onToggleEdit: () => void
+    onToggleDelete: () => void
 }
 
 export default function CommentCard(props: CommentCardProps) {
-    const { onToggleReply, isReplying, ...comment } = props
+    const {
+        onToggleReply,
+        onToggleEdit,
+        onToggleDelete,
+        isReplying = false,
+        isEditing = false,
+        ...comment
+    } = props
 
     const currentUser = useCurrentUser()
     const isOwnedByUser = currentUser.username === props.author.username
@@ -28,16 +38,25 @@ export default function CommentCard(props: CommentCardProps) {
                 publishedAt={comment.publishedAt}
                 isOwnedByUser={isOwnedByUser}
             />
-            <CommentBody
-                content={comment.body}
-                replyingTo={comment.replyingTo}
-            />
+            {isEditing ? (
+                <form>
+                    <textarea>{comment.body}</textarea>
+                    <button type="submit">Update</button>
+                </form>
+            ) : (
+                <CommentBody
+                    content={comment.body}
+                    replyingTo={comment.replyingTo}
+                />
+            )}
             <CommentAction
                 commentId={comment.id}
                 score={comment.score}
                 isOwnedByUser={isOwnedByUser}
                 isReplying={isReplying}
                 onToggleReply={onToggleReply}
+                onToggleEdit={onToggleEdit}
+                onToggleDelete={onToggleDelete}
             />
         </article>
     )

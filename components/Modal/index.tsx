@@ -1,15 +1,10 @@
-export default function Modal() {
-    return (
-        <div>
-            <p>Delete comment</p>
-            <p>
-                Are you sure you want to delete this comment? This will remove
-                the comment and can&apos;t be undone.
-            </p>
-            <div>
-                <button type="button">No, cancel</button>
-                <button type="button">Yes, delete</button>
-            </div>
-        </div>
-    )
+import { ReactNode } from 'react'
+
+type ModalProps = {
+    children: ReactNode
+    isOpen: boolean
+}
+
+export default function Modal({ children, isOpen }: ModalProps) {
+    return <>{isOpen && <div>{children}</div>}</>
 }

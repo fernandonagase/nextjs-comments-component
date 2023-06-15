@@ -7,19 +7,37 @@ type CommentActionProps = {
     isOwnedByUser: boolean
     isReplying: boolean
     onToggleReply: () => void
+    onToggleEdit: () => void
+    onToggleDelete: () => void
 }
 
 export default function CommentAction(props: CommentActionProps) {
-    const { commentId, score, isOwnedByUser, isReplying, onToggleReply } = props
+    const {
+        commentId,
+        score,
+        isOwnedByUser,
+        isReplying,
+        onToggleReply,
+        onToggleEdit,
+        onToggleDelete,
+    } = props
     return (
         <div>
             <ScoreControl count={score} />
             {isOwnedByUser ? (
                 <div>
-                    <IconButton type="button" iconUrl="images/icon-delete.svg">
+                    <IconButton
+                        type="button"
+                        iconUrl="images/icon-delete.svg"
+                        onClick={onToggleDelete}
+                    >
                         Delete
                     </IconButton>
-                    <IconButton type="button" iconUrl="images/icon-edit.svg">
+                    <IconButton
+                        type="button"
+                        iconUrl="images/icon-edit.svg"
+                        onClick={onToggleEdit}
+                    >
                         Edit
                     </IconButton>
                 </div>

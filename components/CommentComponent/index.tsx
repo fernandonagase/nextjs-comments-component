@@ -1,5 +1,4 @@
 import AddComment from '../AddComment'
-import Modal from '../Modal'
 import CommentType from '../Comment/types/comment'
 import CommentThread from '../CommentThread'
 import User from './types/user'
@@ -20,7 +19,6 @@ export default function CommentComponent(props: CommentComponentProps) {
                     ))}
                 </div>
                 <AddComment currentUser={props.currentUser} />
-                <Modal />
             </div>
         </UserContext.Provider>
     )
