@@ -1,4 +1,7 @@
 import { ReactNode } from 'react'
+import { createPortal } from 'react-dom'
+import ModalOverlay from './modal-overlay'
+import ModalContent from './modal-content'
 
 type ModalProps = {
     children: ReactNode
@@ -6,5 +9,15 @@ type ModalProps = {
 }
 
 export default function Modal({ children, isOpen }: ModalProps) {
-    return <>{isOpen && <div>{children}</div>}</>
+    return (
+        <>
+            {isOpen &&
+                createPortal(
+                    <ModalOverlay>
+                        <ModalContent>{children}</ModalContent>
+                    </ModalOverlay>,
+                    document.body
+                )}
+        </>
+    )
 }

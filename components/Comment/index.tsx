@@ -6,6 +6,8 @@ import CommentCard from '../CommentCard'
 import { useCurrentUser } from '../CommentComponent/user-context'
 import useModal from '../Modal/hooks/useModal'
 import Modal from '../Modal'
+import ModalHeader from '../Modal/modal-header'
+import ModalBody from '../Modal/modal-body'
 
 type CommentProps = {
     comment: BaseComment
@@ -54,11 +56,15 @@ export default function Comment(props: CommentProps) {
                 )}
             </div>
             <Modal isOpen={deleteModal.isOpen}>
-                <p>Delete comment</p>
-                <p>
-                    Are you sure you want to delete this comment? This will
-                    remove the comment and can&apos;t be undone.
-                </p>
+                <ModalHeader>
+                    <p>Delete comment</p>
+                </ModalHeader>
+                <ModalBody>
+                    <p>
+                        Are you sure you want to delete this comment? This will
+                        remove the comment and can&apos;t be undone.
+                    </p>
+                </ModalBody>
                 <div>
                     <button
                         type="button"
