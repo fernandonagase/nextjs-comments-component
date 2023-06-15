@@ -6,15 +6,18 @@ import ModalContent from './modal-content'
 type ModalProps = {
     children: ReactNode
     isOpen: boolean
+    onClose: () => void
 }
 
-export default function Modal({ children, isOpen }: ModalProps) {
+export default function Modal({ children, isOpen, onClose }: ModalProps) {
     return (
         <>
             {isOpen &&
                 createPortal(
                     <ModalOverlay>
-                        <ModalContent>{children}</ModalContent>
+                        <ModalContent onClose={onClose}>
+                            {children}
+                        </ModalContent>
                     </ModalOverlay>,
                     document.body
                 )}

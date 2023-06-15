@@ -55,7 +55,7 @@ export default function Comment(props: CommentProps) {
                     </div>
                 )}
             </div>
-            <Modal isOpen={deleteModal.isOpen}>
+            <Modal isOpen={deleteModal.isOpen} onClose={deleteModal.close}>
                 <ModalHeader>
                     <p>Delete comment</p>
                 </ModalHeader>
