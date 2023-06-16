@@ -3,12 +3,15 @@ import { ReactNode } from 'react'
 
 import FocusLock from 'react-focus-lock'
 
-type ModalContentProps = {
+type AlertDialogContentProps = {
     children: ReactNode
     onClose: () => void
 }
 
-export default function ModalContent({ children, onClose }: ModalContentProps) {
+export default function AlertDialogContent({
+    children,
+    onClose,
+}: AlertDialogContentProps) {
     function handleEsc(event: React.KeyboardEvent) {
         const pressedEsc = event.key === 'Escape'
         if (pressedEsc) onClose()

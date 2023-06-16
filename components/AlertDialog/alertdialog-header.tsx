@@ -1,9 +1,11 @@
 import { ReactNode } from 'react'
 
-type ModalHeaderProps = {
+type AlertDialogHeaderProps = {
     children: ReactNode
 }
 
-export default function ModalHeader({ children }: ModalHeaderProps) {
+export default function AlertDialogHeader({
+    children,
+}: AlertDialogHeaderProps) {
     return <header id="alertdialog-header">{children}</header>
 }

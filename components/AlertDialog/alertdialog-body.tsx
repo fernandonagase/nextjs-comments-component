@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 
-type ModalBodyProps = {
+type AlertDialogBodyProps = {
     children: ReactNode
 }
 
-export default function ModalBody({ children }: ModalBodyProps) {
+export default function AlertDialogBody({ children }: AlertDialogBodyProps) {
     return <div id="alertdialog-body">{children}</div>
 }

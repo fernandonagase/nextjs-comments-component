@@ -4,10 +4,10 @@ import AddComment from '../AddComment'
 import BaseComment from './types/base-comment'
 import CommentCard from '../CommentCard'
 import { useCurrentUser } from '../CommentComponent/user-context'
-import useModal from '../Modal/hooks/useModal'
-import Modal from '../Modal'
-import ModalHeader from '../Modal/modal-header'
-import ModalBody from '../Modal/modal-body'
+import useModal from '../AlertDialog/hooks/useModal'
+import AlertDialog from '../AlertDialog'
+import AlertDialogHeader from '../AlertDialog/alertdialog-header'
+import AlertDialogBody from '../AlertDialog/alertdialog-body'
 
 type CommentProps = {
     comment: BaseComment
@@ -55,16 +55,19 @@ export default function Comment(props: CommentProps) {
                     </div>
                 )}
             </div>
-            <Modal isOpen={deleteModal.isOpen} onClose={deleteModal.close}>
-                <ModalHeader>
+            <AlertDialog
+                isOpen={deleteModal.isOpen}
+                onClose={deleteModal.close}
+            >
+                <AlertDialogHeader>
                     <p>Delete comment</p>
-                </ModalHeader>
-                <ModalBody>
+                </AlertDialogHeader>
+                <AlertDialogBody>
                     <p>
                         Are you sure you want to delete this comment? This will
                         remove the comment and can&apos;t be undone.
                     </p>
-                </ModalBody>
+                </AlertDialogBody>
                 <div>
                     <button
                         type="button"
@@ -76,7 +79,7 @@ export default function Comment(props: CommentProps) {
                     </button>
                     <button type="button">Yes, delete</button>
                 </div>
-            </Modal>
+            </AlertDialog>
         </>
     )
 }
