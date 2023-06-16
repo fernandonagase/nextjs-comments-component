@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactNode } from 'react'
 
-import TrapFocus from '../TrapFocus'
+import FocusLock from 'react-focus-lock'
 
 type ModalContentProps = {
     children: ReactNode
@@ -15,7 +15,7 @@ export default function ModalContent({ children, onClose }: ModalContentProps) {
     }
 
     return (
-        <TrapFocus>
+        <FocusLock returnFocus>
             <div
                 role="alertdialog"
                 aria-modal="true"
@@ -26,6 +26,6 @@ export default function ModalContent({ children, onClose }: ModalContentProps) {
             >
                 {children}
             </div>
-        </TrapFocus>
+        </FocusLock>
     )
 }
