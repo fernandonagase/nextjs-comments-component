@@ -1,3 +1,5 @@
+import 'normalize.css/normalize.css'
+
 export const metadata = {
     title: 'Frontend Mentor | Interactive comments section',
     description: 'Interactive comments section built with Next.js',
