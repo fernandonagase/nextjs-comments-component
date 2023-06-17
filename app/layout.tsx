@@ -1,6 +1,8 @@
 import 'normalize.css/normalize.css'
 import { Rubik } from 'next/font/google'
 
+import '@/theme/global.scss'
+
 const rubik = Rubik({ subsets: ['latin'] })
 
 export const metadata = {
