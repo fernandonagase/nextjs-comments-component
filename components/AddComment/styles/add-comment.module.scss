@@ -1,0 +1,15 @@
+.commentForm {
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(211, 10%, 45%);
+
+    &__action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

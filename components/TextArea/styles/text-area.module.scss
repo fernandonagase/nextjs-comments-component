@@ -1,0 +1,12 @@
+$inlinePadding: 24px;
+$blockPadding: 16px;
+
+.textArea {
+    padding-inline-start: $inlinePadding;
+    padding-inline-end: $inlinePadding;
+    padding-block-start: $blockPadding;
+    padding-block-end: $blockPadding;
+    border: 1px solid hsl(223, 19%, 93%);
+    border-radius: 12px;
+    resize: none;
+}
