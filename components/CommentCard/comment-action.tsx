@@ -1,5 +1,6 @@
 import IconButton from '../IconButton'
 import ScoreControl from '../ScoreControl'
+import styles from './styles/comment-card.module.scss'
 
 type CommentActionProps = {
     commentId: number
@@ -22,7 +23,7 @@ export default function CommentAction(props: CommentActionProps) {
         onToggleDelete,
     } = props
     return (
-        <div>
+        <div className={styles.commentCard__action}>
             <ScoreControl count={score} />
             {isOwnedByUser ? (
                 <div>

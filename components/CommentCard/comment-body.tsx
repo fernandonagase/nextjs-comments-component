@@ -1,4 +1,5 @@
 import ReplyComment from '../ReplyComment'
+import styles from './styles/comment-card.module.scss'
 
 type CommentBodyProps = {
     content: string
@@ -7,7 +8,7 @@ type CommentBodyProps = {
 
 export default function CommentBody(props: CommentBodyProps) {
     return (
-        <p>
+        <p className={styles.commentCard__body}>
             {props.replyingTo ? (
                 <ReplyComment
                     username={props.replyingTo}

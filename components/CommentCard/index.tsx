@@ -3,6 +3,7 @@ import CommentBody from './comment-body'
 import CommentHeader from './comment-header'
 import User from '../CommentComponent/types/user'
 import { useCurrentUser } from '../CommentComponent/user-context'
+import styles from './styles/comment-card.module.scss'
 
 type CommentCardProps = {
     id: number
@@ -32,7 +33,7 @@ export default function CommentCard(props: CommentCardProps) {
     const isOwnedByUser = currentUser.username === props.author.username
 
     return (
-        <article>
+        <article className={styles.commentCard}>
             <CommentHeader
                 author={comment.author}
                 publishedAt={comment.publishedAt}
