@@ -6,6 +6,7 @@ import CommentType from '../Comment/types/comment'
 import CommentComponent from '../CommentComponent'
 import { getData } from '@/lib/comment'
 import User from '../CommentComponent/types/user'
+import styles from './styles/comment-section.module.scss'
 
 export default function CommentSection() {
     const [comments, setComments] = useState<CommentType[]>([])
@@ -24,7 +25,7 @@ export default function CommentSection() {
     }, [])
 
     return (
-        <section>
+        <section className={styles.commentSection}>
             {isLoading ? (
                 <p>Carregando comentários...</p>
             ) : (

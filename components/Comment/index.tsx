@@ -8,14 +8,16 @@ import useModal from '../AlertDialog/hooks/useModal'
 import AlertDialog from '../AlertDialog'
 import AlertDialogHeader from '../AlertDialog/alertdialog-header'
 import AlertDialogBody from '../AlertDialog/alertdialog-body'
+import styles from './styles/comment.module.scss'
 
 type CommentProps = {
     comment: BaseComment
     replyingTo?: string
+    className?: string
 }
 
 export default function Comment(props: CommentProps) {
-    const { comment, replyingTo } = props
+    const { comment, replyingTo, className } = props
 
     const [isReplying, setIsReplying] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
@@ -32,7 +34,7 @@ export default function Comment(props: CommentProps) {
 
     return (
         <>
-            <div>
+            <div className={className}>
                 <CommentCard
                     id={comment.id}
                     body={comment.content}
@@ -50,7 +52,10 @@ export default function Comment(props: CommentProps) {
                     key={comment.id}
                 />
                 {isReplying && (
-                    <div id={`reply-comment-${comment.id}`}>
+                    <div
+                        id={`reply-comment-${comment.id}`}
+                        className={styles.comment__replyForm}
+                    >
                         <AddComment currentUser={currentUser} />
                     </div>
                 )}

@@ -3,6 +3,7 @@ import CommentType from '../Comment/types/comment'
 import CommentThread from '../CommentThread'
 import User from './types/user'
 import UserContext from './user-context'
+import styles from './styles/comment-component.module.scss'
 
 type CommentComponentProps = {
     comments: CommentType[]
@@ -15,7 +16,11 @@ export default function CommentComponent(props: CommentComponentProps) {
             <div>
                 <div>
                     {props.comments.map((comment) => (
-                        <CommentThread comment={comment} key={comment.id} />
+                        <CommentThread
+                            comment={comment}
+                            className={styles.commentComponent__thread}
+                            key={comment.id}
+                        />
                     ))}
                 </div>
                 <AddComment currentUser={props.currentUser} />
