@@ -1,0 +1,27 @@
+.scoreControl {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    background-color: hsl(228, 33%, 97%);
+    color: hsl(238, 40%, 52%);
+
+    &__button {
+        height: 100%;
+        padding-inline: 16px;
+        padding-block: 12px;
+        border: none;
+        // display: inline-flex;
+        // align-items: center;
+        // justify-content: center;
+        background-color: transparent;
+    }
+
+    &__label {
+        vertical-align: middle;
+    }
+
+    &__count {
+        padding-inline: 2px;
+    }
+}

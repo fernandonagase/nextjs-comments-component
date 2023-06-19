@@ -12,8 +12,14 @@
     }
 
     &__username {
-        font-weight: 700;
+        font-weight: 500;
         color: hsl(212, 24%, 26%);
+    }
+
+    &__usernameContainer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
     &__body {

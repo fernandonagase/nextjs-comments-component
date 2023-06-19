@@ -1,6 +1,7 @@
 import IconButton from '../IconButton'
 import ScoreControl from '../ScoreControl'
 import styles from './styles/comment-card.module.scss'
+import iconButtonStyles from '@/components/IconButton/styles/icon-button.module.scss'
 
 type CommentActionProps = {
     commentId: number
@@ -30,6 +31,7 @@ export default function CommentAction(props: CommentActionProps) {
                     <IconButton
                         type="button"
                         iconUrl="images/icon-delete.svg"
+                        className={iconButtonStyles['iconButton--danger']}
                         onClick={onToggleDelete}
                     >
                         Delete
@@ -37,6 +39,7 @@ export default function CommentAction(props: CommentActionProps) {
                     <IconButton
                         type="button"
                         iconUrl="images/icon-edit.svg"
+                        className={iconButtonStyles['iconButton--primary']}
                         onClick={onToggleEdit}
                     >
                         Edit
@@ -45,10 +48,11 @@ export default function CommentAction(props: CommentActionProps) {
             ) : (
                 <IconButton
                     type="button"
-                    onClick={onToggleReply}
                     aria-expanded={isReplying}
                     aria-controls={`reply-comment-${commentId}`}
+                    className={iconButtonStyles['iconButton--primary']}
                     iconUrl="images/icon-reply.svg"
+                    onClick={onToggleReply}
                 >
                     Reply
                 </IconButton>

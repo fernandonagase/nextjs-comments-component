@@ -15,7 +15,7 @@ export default function CommentHeader(props: CommentHeaderProps) {
     return (
         <header className={styles.commentCard__header}>
             <Avatar pictureUrl={author.avatarUrl} />
-            <div>
+            <div className={styles.commentCard__usernameContainer}>
                 <span className={styles.commentCard__username}>
                     {author.username}
                 </span>

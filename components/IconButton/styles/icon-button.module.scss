@@ -1,0 +1,16 @@
+.iconButton {
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    font-weight: 500;
+
+    &--primary {
+        color: hsl(238, 40%, 52%);
+    }
+
+    &--danger {
+        color: hsl(358, 79%, 66%);
+    }
+}

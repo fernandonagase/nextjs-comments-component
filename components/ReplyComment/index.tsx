@@ -1,3 +1,5 @@
+import styles from './styles/reply-comment.module.scss'
+
 type ReplyCommentProps = {
     content: string
     username: string
@@ -6,7 +8,8 @@ type ReplyCommentProps = {
 export default function ReplyComment(props: ReplyCommentProps) {
     return (
         <>
-            @{props.username} {props.content}
+            <span className={styles.replyingTo}>@{props.username}</span>{' '}
+            {props.content}
         </>
     )
 }
