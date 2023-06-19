@@ -1,8 +1,12 @@
+import classNames from 'classnames'
+
 import Avatar from '../Avatar'
+import Button from '../Button'
 import User from '../CommentComponent/types/user'
 import FormControl from '../FormControl'
 import TextArea from '../TextArea'
 import styles from './styles/add-comment.module.scss'
+import buttonStyles from '@/components/Button/styles/button.module.scss'
 
 type AddCommentProps = {
     currentUser: User
@@ -19,7 +23,15 @@ export default function AddComment(props: AddCommentProps) {
             </FormControl>
             <div className={styles.commentForm__action}>
                 <Avatar pictureUrl={props.currentUser.avatarUrl} />
-                <button type="submit">Send</button>
+                <Button
+                    type="submit"
+                    className={classNames(
+                        buttonStyles['button--primary'],
+                        buttonStyles['button--rounded']
+                    )}
+                >
+                    Send
+                </Button>
             </div>
         </form>
     )

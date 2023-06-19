@@ -1,0 +1,20 @@
+$inlinePadding: 32px;
+$blockPadding: 16px;
+
+.button {
+    padding-inline: $inlinePadding;
+    padding-block: $blockPadding;
+    border: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    &--rounded {
+        border-radius: 8px;
+    }
+
+    &--primary {
+        background-color: hsl(238, 40%, 52%);
+        color: hsl(0, 0%, 100%);
+    }
+}
