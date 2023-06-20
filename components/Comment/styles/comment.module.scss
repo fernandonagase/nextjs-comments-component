@@ -1,4 +1,9 @@
 .comment {
+    &__buttons {
+        display: flex;
+        gap: 16px;
+    }
+
     &__replyForm {
         margin-block-start: 8px;
     }

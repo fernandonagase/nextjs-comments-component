@@ -3,3 +3,7 @@
 body {
     background-color: variables.$very-light-gray;
 }
+
+.modal-open {
+    overflow-y: hidden;
+}

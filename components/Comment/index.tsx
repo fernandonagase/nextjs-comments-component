@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import classNames from 'classnames'
 
 import AddComment from '../AddComment'
 import BaseComment from './types/base-comment'
@@ -9,6 +10,8 @@ import AlertDialog from '../AlertDialog'
 import AlertDialogHeader from '../AlertDialog/alertdialog-header'
 import AlertDialogBody from '../AlertDialog/alertdialog-body'
 import styles from './styles/comment.module.scss'
+import Button from '../Button'
+import buttonStyles from '../Button/styles/button.module.scss'
 
 type CommentProps = {
     comment: BaseComment
@@ -64,25 +67,35 @@ export default function Comment(props: CommentProps) {
                 isOpen={deleteModal.isOpen}
                 onClose={deleteModal.close}
             >
-                <AlertDialogHeader>
-                    <p>Delete comment</p>
-                </AlertDialogHeader>
+                <AlertDialogHeader>Delete comment</AlertDialogHeader>
                 <AlertDialogBody>
                     <p>
                         Are you sure you want to delete this comment? This will
                         remove the comment and can&apos;t be undone.
                     </p>
                 </AlertDialogBody>
-                <div>
-                    <button
+                <div className={styles.comment__buttons}>
+                    <Button
                         type="button"
+                        className={classNames([
+                            buttonStyles['button--rounded'],
+                            buttonStyles['button--secondary'],
+                        ])}
                         onClick={() => {
                             deleteModal.close()
                         }}
                     >
                         No, cancel
-                    </button>
-                    <button type="button">Yes, delete</button>
+                    </Button>
+                    <Button
+                        type="button"
+                        className={classNames([
+                            buttonStyles['button--rounded'],
+                            buttonStyles['button--danger'],
+                        ])}
+                    >
+                        Yes, delete
+                    </Button>
                 </div>
             </AlertDialog>
         </>

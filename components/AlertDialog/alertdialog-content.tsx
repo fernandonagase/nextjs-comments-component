@@ -1,7 +1,8 @@
 import React from 'react'
 import { ReactNode } from 'react'
-
 import FocusLock from 'react-focus-lock'
+
+import styles from './styles/alert-dialog.module.scss'
 
 type AlertDialogContentProps = {
     children: ReactNode
@@ -26,6 +27,7 @@ export default function AlertDialogContent({
                 aria-describedby="alertdialog-body"
                 onKeyDown={handleEsc}
                 tabIndex={-1}
+                className={styles.alertDialog__content}
             >
                 {children}
             </div>

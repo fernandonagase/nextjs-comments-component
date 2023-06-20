@@ -1,5 +1,7 @@
 import { ReactNode } from 'react'
 
+import styles from './styles/alert-dialog.module.scss'
+
 type AlertDialogOverlayProps = {
     children: ReactNode
 }
@@ -7,5 +9,5 @@ type AlertDialogOverlayProps = {
 export default function AlertDialogOverlay({
     children,
 }: AlertDialogOverlayProps) {
-    return <div>{children}</div>
+    return <div className={styles.alertDialog__overlay}>{children}</div>
 }

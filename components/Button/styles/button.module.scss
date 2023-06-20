@@ -17,4 +17,14 @@ $blockPadding: 16px;
         background-color: hsl(238, 40%, 52%);
         color: hsl(0, 0%, 100%);
     }
+
+    &--secondary {
+        background-color: hsl(211, 10%, 45%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    &--danger {
+        background-color: hsl(358, 79%, 66%);
+        color: hsl(0, 0%, 100%);
+    }
 }

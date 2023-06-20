@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import AlertDialogOverlay from './alertdialog-overlay'
 import AlertDialogContent from './alertdialog-content'
@@ -14,6 +14,14 @@ export default function AlertDialog({
     isOpen,
     onClose,
 }: AlertDialogProps) {
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('modal-open')
+        } else {
+            document.body.classList.remove('modal-open')
+        }
+    }, [isOpen])
+
     return (
         <>
             {isOpen &&
