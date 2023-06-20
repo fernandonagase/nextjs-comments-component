@@ -1,9 +1,14 @@
+import classNames from 'classnames'
+
+import styles from './styles/comment-card.module.scss'
 import CommentAction from './comment-action'
 import CommentBody from './comment-body'
 import CommentHeader from './comment-header'
 import User from '../CommentComponent/types/user'
 import { useCurrentUser } from '../CommentComponent/user-context'
-import styles from './styles/comment-card.module.scss'
+import TextArea from '../TextArea'
+import Button from '../Button'
+import buttonStyles from '../Button/styles/button.module.scss'
 
 type CommentCardProps = {
     id: number
@@ -40,9 +45,17 @@ export default function CommentCard(props: CommentCardProps) {
                 isOwnedByUser={isOwnedByUser}
             />
             {isEditing ? (
-                <form>
-                    <textarea>{comment.body}</textarea>
-                    <button type="submit">Update</button>
+                <form className={styles.commentCard__editForm}>
+                    <TextArea>{comment.body}</TextArea>
+                    <Button
+                        type="submit"
+                        className={classNames([
+                            buttonStyles['button--rounded'],
+                            buttonStyles['button--primary'],
+                        ])}
+                    >
+                        Update
+                    </Button>
                 </form>
             ) : (
                 <CommentBody
