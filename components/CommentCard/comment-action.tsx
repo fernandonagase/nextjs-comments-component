@@ -8,6 +8,7 @@ type CommentActionProps = {
     score: number
     isOwnedByUser: boolean
     isReplying: boolean
+    isEditing: boolean
     onToggleReply: () => void
     onToggleEdit: () => void
     onToggleDelete: () => void
@@ -19,6 +20,7 @@ export default function CommentAction(props: CommentActionProps) {
         score,
         isOwnedByUser,
         isReplying,
+        isEditing,
         onToggleReply,
         onToggleEdit,
         onToggleDelete,
@@ -31,6 +33,7 @@ export default function CommentAction(props: CommentActionProps) {
                     <IconButton
                         type="button"
                         iconUrl="images/icon-delete.svg"
+                        disabled={isEditing}
                         className={iconButtonStyles['iconButton--danger']}
                         onClick={onToggleDelete}
                     >

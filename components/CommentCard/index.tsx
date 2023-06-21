@@ -19,8 +19,10 @@ type CommentCardProps = {
     replyingTo?: string
     isReplying?: boolean
     isEditing?: boolean
+    isDeleting?: boolean
     onToggleReply: () => void
     onToggleEdit: () => void
+    onEdit: () => void
     onToggleDelete: () => void
 }
 
@@ -28,9 +30,11 @@ export default function CommentCard(props: CommentCardProps) {
     const {
         onToggleReply,
         onToggleEdit,
+        onEdit,
         onToggleDelete,
         isReplying = false,
         isEditing = false,
+        isDeleting = false,
         ...comment
     } = props
 
@@ -49,6 +53,11 @@ export default function CommentCard(props: CommentCardProps) {
                     <TextArea>{comment.body}</TextArea>
                     <Button
                         type="submit"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            onEdit()
+                            onToggleEdit()
+                        }}
                         className={classNames([
                             buttonStyles['button--rounded'],
                             buttonStyles['button--primary'],
@@ -68,6 +77,7 @@ export default function CommentCard(props: CommentCardProps) {
                 score={comment.score}
                 isOwnedByUser={isOwnedByUser}
                 isReplying={isReplying}
+                isEditing={isEditing}
                 onToggleReply={onToggleReply}
                 onToggleEdit={onToggleEdit}
                 onToggleDelete={onToggleDelete}

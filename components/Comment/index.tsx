@@ -35,6 +35,10 @@ export default function Comment(props: CommentProps) {
         setIsEditing((prev) => !prev)
     }
 
+    function handleEdit() {
+        alert('Comment successfully edited!')
+    }
+
     return (
         <>
             <div className={className}>
@@ -47,8 +51,10 @@ export default function Comment(props: CommentProps) {
                     replyingTo={replyingTo}
                     isReplying={isReplying}
                     isEditing={isEditing}
+                    isDeleting={deleteModal.isOpen}
                     onToggleReply={handleToggleReply}
                     onToggleEdit={handleToggleEdit}
+                    onEdit={handleEdit}
                     onToggleDelete={() => {
                         deleteModal.open()
                     }}
