@@ -1,0 +1,29 @@
+@use 'sass:color';
+
+@mixin solid($bg-colors, $fg-color) {
+    @each $color, $value in $bg-colors {
+        &--#{$color} {
+            background-color: $value;
+            color: $fg-color;
+            transition: background-color 300ms;
+
+            &:hover {
+                background-color: color.scale($value, $lightness: 30%);
+            }
+        }
+    }
+}
+
+@mixin text($fg-colors) {
+    @each $color, $value in $fg-colors {
+        &--#{$color} {
+            background-color: transparent;
+            color: $value;
+            transition: color 300ms;
+
+            &:hover {
+                color: color.scale($value, $lightness: 30%);
+            }
+        }
+    }
+}

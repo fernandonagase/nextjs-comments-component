@@ -1,3 +1,10 @@
+@use '../../../theme/mixins/button-colors.scss';
+
+$colors: (
+    'primary': hsl(238, 40%, 52%),
+    'danger': hsl(358, 79%, 66%),
+);
+
 .iconButton {
     border: none;
     display: inline-flex;
@@ -5,12 +12,12 @@
     gap: 8px;
     background-color: transparent;
     font-weight: 500;
+    cursor: pointer;
 
-    &--primary {
-        color: hsl(238, 40%, 52%);
-    }
+    @include button-colors.text($colors);
 
-    &--danger {
-        color: hsl(358, 79%, 66%);
+    &__icon {
+        display: flex;
+        align-items: center;
     }
 }

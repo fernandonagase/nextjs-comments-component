@@ -1,5 +1,12 @@
+@use '../../../theme/mixins/button-colors.scss';
+
 $inlinePadding: 32px;
 $blockPadding: 16px;
+$colors: (
+    'primary': hsl(238, 40%, 52%),
+    'secondary': hsl(211, 10%, 45%),
+    'danger': hsl(358, 79%, 66%),
+);
 
 .button {
     padding-inline: $inlinePadding;
@@ -8,23 +15,11 @@ $blockPadding: 16px;
     background-color: transparent;
     text-transform: uppercase;
     font-weight: 500;
+    cursor: pointer;
 
     &--rounded {
         border-radius: 8px;
     }
 
-    &--primary {
-        background-color: hsl(238, 40%, 52%);
-        color: hsl(0, 0%, 100%);
-    }
-
-    &--secondary {
-        background-color: hsl(211, 10%, 45%);
-        color: hsl(0, 0%, 100%);
-    }
-
-    &--danger {
-        background-color: hsl(358, 79%, 66%);
-        color: hsl(0, 0%, 100%);
-    }
+    @include button-colors.solid($colors, hsl(0, 0%, 100%));
 }

@@ -11,10 +11,14 @@
         padding-inline: 16px;
         padding-block: 12px;
         border: none;
-        // display: inline-flex;
-        // align-items: center;
-        // justify-content: center;
         background-color: transparent;
+        cursor: pointer;
+        color: hsl(239, 57%, 85%);
+        transition: color 300ms;
+
+        &:hover {
+            color: hsl(238, 40%, 52%);
+        }
     }
 
     &__label {
