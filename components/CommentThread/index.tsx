@@ -13,7 +13,7 @@ export default function CommentThread(props: CommentThreadProps) {
         <div className={className}>
             <Comment comment={comment} />
             {comment.replies.length > 0 && (
-                <div>
+                <div className={styles.commentThread__list}>
                     {comment.replies.map((reply) => (
                         <Comment
                             comment={reply}

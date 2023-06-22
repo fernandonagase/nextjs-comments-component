@@ -1,4 +1,9 @@
 .commentThread {
+    &__list {
+        padding-inline-start: 16px;
+        border-inline-start: 2px solid hsl(223, 19%, 93%);
+    }
+
     &__reply {
         margin-block-start: 16px;
     }
