@@ -8,3 +8,12 @@
         margin-block-start: 16px;
     }
 }
+
+@media screen and (min-width: 1024px) {
+    .commentThread {
+        &__list {
+            padding-inline-start: 32px;
+            margin-inline-start: 32px;
+        }
+    }
+}

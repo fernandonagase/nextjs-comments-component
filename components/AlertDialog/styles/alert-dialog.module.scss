@@ -17,6 +17,7 @@
         margin-inline: 16px;
         background-color: hsl(0, 0%, 100%);
         color: hsl(211, 10%, 45%);
+        line-height: 1.5;
     }
 
     &__title {
@@ -24,5 +25,18 @@
         font-size: 1.25em;
         font-weight: 500;
         color: hsl(212, 24%, 26%);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .alertDialog {
+        &__content {
+            max-width: min-content;
+            padding: 32px;
+
+            & button {
+                width: max-content;
+            }
+        }
     }
 }
