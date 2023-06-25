@@ -1,0 +1,13 @@
+@use './variables';
+
+body {
+    background-color: variables.$very-light-gray;
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+.modal-open {
+    overflow-y: hidden;
+}

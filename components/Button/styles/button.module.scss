@@ -1,0 +1,25 @@
+@use '../../../theme/mixins/button-colors.scss';
+
+$inlinePadding: 32px;
+$blockPadding: 16px;
+$colors: (
+    'primary': hsl(238, 40%, 52%),
+    'secondary': hsl(211, 10%, 45%),
+    'danger': hsl(358, 79%, 66%),
+);
+
+.button {
+    padding-inline: $inlinePadding;
+    padding-block: $blockPadding;
+    border: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+
+    &--rounded {
+        border-radius: 8px;
+    }
+
+    @include button-colors.solid($colors, hsl(0, 0%, 100%));
+}

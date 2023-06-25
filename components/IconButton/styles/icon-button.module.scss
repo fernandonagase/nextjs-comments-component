@@ -1,0 +1,23 @@
+@use '../../../theme/mixins/button-colors.scss';
+
+$colors: (
+    'primary': hsl(238, 40%, 52%),
+    'danger': hsl(358, 79%, 66%),
+);
+
+.iconButton {
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    font-weight: 500;
+    cursor: pointer;
+
+    @include button-colors.text($colors);
+
+    &__icon {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,12 @@
+.commentSection {
+    padding-inline: 16px;
+    padding-block-start: 32px;
+}
+
+@media screen and (min-width: 1440px) {
+    .commentSection {
+        max-width: 768px;
+        padding-block: 64px;
+        margin: auto;
+    }
+}

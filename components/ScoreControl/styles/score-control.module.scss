@@ -1,0 +1,39 @@
+.scoreControl {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    background-color: hsl(228, 33%, 97%);
+    color: hsl(238, 40%, 52%);
+
+    &--horizontal {
+        flex-direction: row;
+    }
+
+    &--vertical {
+        flex-direction: column;
+    }
+
+    &__button {
+        height: 100%;
+        padding-inline: 16px;
+        padding-block: 12px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        color: hsl(239, 57%, 85%);
+        transition: color 300ms;
+
+        &:hover {
+            color: hsl(238, 40%, 52%);
+        }
+    }
+
+    &__label {
+        vertical-align: middle;
+    }
+
+    &__count {
+        padding-inline: 2px;
+    }
+}

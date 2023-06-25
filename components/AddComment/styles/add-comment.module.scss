@@ -1,0 +1,27 @@
+.commentForm {
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(211, 10%, 45%);
+
+    &__action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .commentForm {
+        padding: 24px;
+        flex-direction: row;
+        align-items: flex-end;
+
+        &__textBox {
+            flex-grow: 1;
+        }
+    }
+}
