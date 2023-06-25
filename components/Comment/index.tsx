@@ -39,6 +39,10 @@ export default function Comment(props: CommentProps) {
         alert('Comment successfully edited!')
     }
 
+    function handleReply() {
+        alert('Replied with success!')
+    }
+
     return (
         <>
             <div className={className}>
@@ -65,7 +69,12 @@ export default function Comment(props: CommentProps) {
                         id={`reply-comment-${comment.id}`}
                         className={styles.comment__replyForm}
                     >
-                        <AddComment currentUser={currentUser} />
+                        <AddComment
+                            currentUser={currentUser}
+                            isReplying={isReplying}
+                            autofocus
+                            onSubmit={handleReply}
+                        />
                     </div>
                 )}
             </div>

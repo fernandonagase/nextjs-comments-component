@@ -1,12 +1,21 @@
+import classNames from 'classnames'
 import styles from './styles/score-control.module.scss'
 
 type ScoreControlProps = {
     count: number
+    direction?: 'horizontal' | 'vertical'
 }
 
 export default function ScoreControl(props: ScoreControlProps) {
+    const { count, direction = 'horizontal' } = props
+
     return (
-        <div className={styles.scoreControl}>
+        <div
+            className={classNames([
+                styles.scoreControl,
+                styles[`scoreControl--${direction}`],
+            ])}
+        >
             <button
                 type="button"
                 aria-label="Acrescentar 1"
@@ -24,7 +33,7 @@ export default function ScoreControl(props: ScoreControlProps) {
                     />
                 </svg>
             </button>
-            <span className={styles.scoreControl__count}>{props.count}</span>
+            <span className={styles.scoreControl__count}>{count}</span>
             <button
                 type="button"
                 aria-label="Diminuir 1"

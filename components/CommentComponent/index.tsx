@@ -11,6 +11,10 @@ type CommentComponentProps = {
 }
 
 export default function CommentComponent(props: CommentComponentProps) {
+    function handleComment() {
+        alert('Commented with success!')
+    }
+
     return (
         <UserContext.Provider value={props.currentUser}>
             <div>
@@ -23,7 +27,10 @@ export default function CommentComponent(props: CommentComponentProps) {
                         />
                     ))}
                 </div>
-                <AddComment currentUser={props.currentUser} />
+                <AddComment
+                    currentUser={props.currentUser}
+                    onSubmit={handleComment}
+                />
             </div>
         </UserContext.Provider>
     )

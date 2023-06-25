@@ -1,15 +1,24 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithRef, forwardRef } from 'react'
 
 import styles from './styles/text-area.module.scss'
 
-type TextAreaProps = ComponentPropsWithoutRef<'textarea'>
+type TextAreaProps = ComponentPropsWithRef<'textarea'>
 
-export default function TextArea(props: TextAreaProps) {
-    const { children, ...otherProps } = props
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+    function TextArea(props, ref) {
+        const { children, ...otherProps } = props
 
-    return (
-        <textarea {...otherProps} rows={3} className={styles.textArea}>
-            {children}
-        </textarea>
-    )
-}
+        return (
+            <textarea
+                rows={3}
+                className={styles.textArea}
+                ref={ref}
+                {...otherProps}
+            >
+                {children}
+            </textarea>
+        )
+    }
+)
+
+export default TextArea

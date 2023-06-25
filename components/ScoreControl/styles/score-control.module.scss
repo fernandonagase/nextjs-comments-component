@@ -6,6 +6,14 @@
     background-color: hsl(228, 33%, 97%);
     color: hsl(238, 40%, 52%);
 
+    &--horizontal {
+        flex-direction: row;
+    }
+
+    &--vertical {
+        flex-direction: column;
+    }
+
     &__button {
         height: 100%;
         padding-inline: 16px;

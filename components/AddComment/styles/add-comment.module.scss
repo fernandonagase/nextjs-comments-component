@@ -13,3 +13,15 @@
         align-items: center;
     }
 }
+
+@media screen and (min-width: 1440px) {
+    .commentForm {
+        padding: 24px;
+        flex-direction: row;
+        align-items: flex-end;
+
+        &__textBox {
+            flex-grow: 1;
+        }
+    }
+}
