@@ -1,0 +1,16 @@
+.commentHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &__usernameContainer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__username {
+        font-weight: 500;
+        color: hsl(212, 24%, 26%);
+    }
+}

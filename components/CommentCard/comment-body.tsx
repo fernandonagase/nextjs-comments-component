@@ -1,22 +1,56 @@
+import Button from '../Button'
 import ReplyComment from '../ReplyComment'
-import styles from './styles/comment-card.module.scss'
+import TextArea from '../TextArea'
+
+// import styles from './styles/comment-card.module.scss'
+import styles from './styles/comment-body.module.scss'
 
 type CommentBodyProps = {
     content: string
     replyingTo?: string
+    isEditing?: boolean
+    handleToggleEdit: () => void
+    handleEdit: () => void
 }
 
-export default function CommentBody(props: CommentBodyProps) {
+export default function CommentBody({
+    content,
+    replyingTo,
+    isEditing = false,
+    handleToggleEdit,
+    handleEdit,
+}: CommentBodyProps) {
     return (
-        <p className={styles.commentCard__body}>
-            {props.replyingTo ? (
-                <ReplyComment
-                    username={props.replyingTo}
-                    content={props.content}
-                />
+        <>
+            {isEditing ? (
+                <form className={styles.commentBody__editForm}>
+                    <TextArea
+                        value={content}
+                        placeholder="Comment text"
+                    ></TextArea>
+                    <Button
+                        type="submit"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            handleEdit()
+                            handleToggleEdit()
+                        }}
+                        variant="rounded"
+                        color="primary"
+                        className={styles.commentBody__updateButton}
+                    >
+                        Update
+                    </Button>
+                </form>
             ) : (
-                props.content
+                <p className={styles.commentBody__body}>
+                    {replyingTo ? (
+                        <ReplyComment username={replyingTo} content={content} />
+                    ) : (
+                        content
+                    )}
+                </p>
             )}
-        </p>
+        </>
     )
 }

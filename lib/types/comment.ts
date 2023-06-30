@@ -1,17 +1,9 @@
 import User from './user'
 
-interface CommentBase {
-    id: number
+export default interface Comment {
+    id: string
     content: string
-    createdAt: string
+    createdAt: number
     score: number
     user: User
-}
-
-interface Reply extends CommentBase {
-    replyingTo: string
-}
-
-export default interface Comment extends CommentBase {
-    replies: Reply[]
 }
