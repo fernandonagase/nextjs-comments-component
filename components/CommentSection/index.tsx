@@ -5,25 +5,39 @@ import { useEffect, useState } from 'react'
 import CommentComponent from '../CommentComponent'
 import styles from './styles/comment-section.module.scss'
 import { getComments } from '@/lib/comments-repository'
-import RootComment from '@/lib/types/root-comment'
 import User from '@/lib/types/user'
 import { getCurrentUser } from '@/lib/user-repository'
 import UserContext from '@/lib/context/user-context'
+import {
+    useComments,
+    useCommentsDispatch,
+} from '@/lib/context/comments/comments-context'
+import initialize from '@/lib/context/comments/actions/initialize'
 
 export default function CommentSection() {
-    const [comments, setComments] = useState<RootComment[]>([])
+    const comments = useComments()
+    const commentsDispatch = useCommentsDispatch()
+
     const [currentUser, setCurrentUser] = useState<User | null>(null)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        async function fetchComments() {
+        async function fetchUser() {
             setIsLoading(true)
-            setComments(await getComments())
             setCurrentUser(await getCurrentUser())
             setIsLoading(false)
         }
-        fetchComments()
+        fetchUser()
     }, [])
+
+    useEffect(() => {
+        async function fetchComments() {
+            setIsLoading(true)
+            commentsDispatch(initialize(await getComments()))
+            setIsLoading(false)
+        }
+        fetchComments()
+    }, [commentsDispatch])
 
     return (
         <UserContext.Provider value={currentUser}>
