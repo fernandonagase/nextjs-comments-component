@@ -4,7 +4,8 @@ interface BaseComment {
     id: number
     content: string
     createdAt: number
-    score: number
+    upvoted: string[]
+    downvoted: string[]
     user: User
 }
 

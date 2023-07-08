@@ -4,6 +4,7 @@ export default interface Comment {
     id: string
     content: string
     createdAt: number
-    score: number
+    upvoted: string[]
+    downvoted: string[]
     user: User
 }

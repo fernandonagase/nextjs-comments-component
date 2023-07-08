@@ -20,11 +20,15 @@ type CommentCardProps = {
     timestamp: number
     content: string
     isReplying: boolean
+    hasUpvoted: boolean
+    hasDownvoted: boolean
     replyingTo?: string
     isOwnedByUser?: boolean
     onToggleReply: () => void
     onEdit: () => void
     onDelete: () => void
+    onUpvote: () => void
+    onDownvote: () => void
 }
 
 export default function CommentCard({
@@ -34,11 +38,15 @@ export default function CommentCard({
     timestamp,
     content,
     isReplying,
+    hasUpvoted,
+    hasDownvoted,
     replyingTo,
     isOwnedByUser = false,
     onToggleReply,
     onEdit,
     onDelete,
+    onUpvote,
+    onDownvote,
 }: CommentCardProps) {
     const isLargerThan1440 = useMediaQuery('screen and (min-width: 1440px)')
 
@@ -86,6 +94,10 @@ export default function CommentCard({
                     <ScoreControl
                         count={score}
                         direction={isLargerThan1440 ? 'vertical' : 'horizontal'}
+                        hasIncreased={hasUpvoted}
+                        hasDecreased={hasDownvoted}
+                        onIncrease={onUpvote}
+                        onDecrease={onDownvote}
                     />
                 </div>
                 {!isLargerThan1440 && (

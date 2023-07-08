@@ -4,11 +4,20 @@ import styles from './styles/score-control.module.scss'
 type ScoreControlProps = {
     count: number
     direction?: 'horizontal' | 'vertical'
+    hasIncreased: boolean
+    hasDecreased: boolean
+    onIncrease: () => void
+    onDecrease: () => void
 }
 
-export default function ScoreControl(props: ScoreControlProps) {
-    const { count, direction = 'horizontal' } = props
-
+export default function ScoreControl({
+    count,
+    direction = 'horizontal',
+    hasIncreased,
+    hasDecreased,
+    onIncrease,
+    onDecrease,
+}: ScoreControlProps) {
     return (
         <div
             className={classNames([
@@ -19,6 +28,8 @@ export default function ScoreControl(props: ScoreControlProps) {
             <button
                 type="button"
                 aria-label="Acrescentar 1"
+                onClick={onIncrease}
+                aria-pressed={hasIncreased}
                 className={styles.scoreControl__button}
             >
                 <svg
@@ -37,6 +48,8 @@ export default function ScoreControl(props: ScoreControlProps) {
             <button
                 type="button"
                 aria-label="Diminuir 1"
+                onClick={onDecrease}
+                aria-pressed={hasDecreased}
                 className={styles.scoreControl__button}
             >
                 <svg

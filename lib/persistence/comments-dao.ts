@@ -1,4 +1,5 @@
 import RootComment from '../types/root-comment'
+import BaseComment from '../types/comment'
 import * as dao from './dao'
 
 function getComments(): RootComment[] {
@@ -9,13 +10,21 @@ function addComment(comment: RootComment) {
     cacheComments([...getComments(), comment])
 }
 
-function updateComment(updatedComment: RootComment) {
+function updateComment(updatedComment: BaseComment) {
     cacheComments(
-        getComments().map((comment) =>
-            comment.id === updatedComment.id
-                ? { ...comment, ...updatedComment }
-                : comment
-        )
+        getComments().map((comment) => {
+            if (comment.id === updatedComment.id) {
+                return { ...comment, ...updatedComment }
+            }
+            return {
+                ...comment,
+                replies: comment.replies.map((reply) =>
+                    reply.id === updatedComment.id
+                        ? { ...reply, ...updatedComment }
+                        : reply
+                ),
+            }
+        })
     )
 }
 

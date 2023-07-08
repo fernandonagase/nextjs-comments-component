@@ -1,6 +1,7 @@
 import * as commentsDao from './persistence/comments-dao'
 import ApiComment from '@/app/api/lib/types/comment'
 import mapUser from './util/map-user'
+import BaseComment from './types/comment'
 import RootComment from './types/root-comment'
 
 async function fetchData(): Promise<RootComment[]> {
@@ -38,7 +39,7 @@ function addComment(comment: RootComment) {
     commentsDao.addComment(comment)
 }
 
-function updateComment(comment: RootComment) {
+function updateComment(comment: BaseComment) {
     commentsDao.updateComment(comment)
 }
 
