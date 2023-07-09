@@ -6,6 +6,7 @@ type ScoreControlProps = {
     direction?: 'horizontal' | 'vertical'
     hasIncreased: boolean
     hasDecreased: boolean
+    disabled?: boolean
     onIncrease: () => void
     onDecrease: () => void
 }
@@ -15,6 +16,7 @@ export default function ScoreControl({
     direction = 'horizontal',
     hasIncreased,
     hasDecreased,
+    disabled = false,
     onIncrease,
     onDecrease,
 }: ScoreControlProps) {
@@ -30,6 +32,7 @@ export default function ScoreControl({
                 aria-label="Acrescentar 1"
                 onClick={onIncrease}
                 aria-pressed={hasIncreased}
+                disabled={disabled}
                 className={styles.scoreControl__button}
             >
                 <svg
@@ -50,6 +53,7 @@ export default function ScoreControl({
                 aria-label="Diminuir 1"
                 onClick={onDecrease}
                 aria-pressed={hasDecreased}
+                disabled={disabled}
                 className={styles.scoreControl__button}
             >
                 <svg

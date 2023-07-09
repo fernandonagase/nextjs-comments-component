@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import Button from '../Button'
 import ReplyComment from '../ReplyComment'
 import TextArea from '../TextArea'
@@ -9,32 +10,46 @@ type CommentBodyProps = {
     content: string
     replyingTo?: string
     isEditing?: boolean
-    handleToggleEdit: () => void
-    handleEdit: () => void
+    onToggleEdit: () => void
+    onEdit: (content: string) => void
 }
 
 export default function CommentBody({
     content,
     replyingTo,
     isEditing = false,
-    handleToggleEdit,
-    handleEdit,
+    onToggleEdit,
+    onEdit,
 }: CommentBodyProps) {
+    const editTextAreaRef = useRef<HTMLTextAreaElement>(null)
+
     return (
         <>
             {isEditing ? (
-                <form className={styles.commentBody__editForm}>
+                <form
+                    className={styles.commentBody__editForm}
+                    onSubmit={(e) => {
+                        e.preventDefault()
+
+                        const form = e.target as HTMLFormElement
+                        form.reportValidity()
+
+                        if (!editTextAreaRef.current) {
+                            throw Error('editTextAreaRef is not assigned')
+                        }
+
+                        onEdit(editTextAreaRef.current.value)
+                        onToggleEdit()
+                    }}
+                >
                     <TextArea
-                        value={content}
+                        defaultValue={content}
                         placeholder="Comment text"
+                        required
+                        ref={editTextAreaRef}
                     ></TextArea>
                     <Button
                         type="submit"
-                        onClick={(e) => {
-                            e.preventDefault()
-                            handleEdit()
-                            handleToggleEdit()
-                        }}
                         variant="rounded"
                         color="primary"
                         className={styles.commentBody__updateButton}

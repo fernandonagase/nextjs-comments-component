@@ -1,5 +1,12 @@
 import BaseComment from './types/comment'
 
+function editContent(comment: BaseComment, content: string) {
+    return {
+        ...comment,
+        content,
+    }
+}
+
 function toggleUpvote(comment: BaseComment, userId: string) {
     return comment.upvoted.includes(userId)
         ? removeUpvote(comment, userId)
@@ -46,4 +53,4 @@ function removeDownvote(comment: BaseComment, userId: string) {
     }
 }
 
-export { toggleUpvote, toggleDownvote }
+export { toggleUpvote, toggleDownvote, editContent }

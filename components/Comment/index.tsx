@@ -8,7 +8,8 @@ import styles from './styles/comment.module.scss'
 import { useCommentsDispatch } from '@/lib/context/comments/comments-context'
 import upvoteAction from '@/lib/context/comments/actions/upvote'
 import downvoteAction from '@/lib/context/comments/actions/downvote'
-import { toggleDownvote, toggleUpvote } from '@/lib/comments'
+import editAction from '@/lib/context/comments/actions/edit'
+import { editContent, toggleDownvote, toggleUpvote } from '@/lib/comments'
 import { updateComment } from '@/lib/comments-repository'
 
 type CommentProps = {
@@ -35,8 +36,9 @@ export default function Comment(props: CommentProps) {
         setIsReplying(false)
     }
 
-    function handleEdit() {
-        alert('Comment successfully edited!')
+    function handleEdit(content: string) {
+        updateComment(editContent(comment, content))
+        commentsDispatch(editAction(comment.id, content))
     }
 
     function handleDelete() {

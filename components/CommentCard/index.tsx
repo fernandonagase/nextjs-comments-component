@@ -25,7 +25,7 @@ type CommentCardProps = {
     replyingTo?: string
     isOwnedByUser?: boolean
     onToggleReply: () => void
-    onEdit: () => void
+    onEdit: (content: string) => void
     onDelete: () => void
     onUpvote: () => void
     onDownvote: () => void
@@ -86,8 +86,8 @@ export default function CommentCard({
                         content={content}
                         replyingTo={replyingTo}
                         isEditing={isEditing}
-                        handleToggleEdit={handleToggleEdit}
-                        handleEdit={onEdit}
+                        onToggleEdit={handleToggleEdit}
+                        onEdit={onEdit}
                     />
                 </div>
                 <div className={styles.commentCard__score}>
@@ -96,6 +96,7 @@ export default function CommentCard({
                         direction={isLargerThan1440 ? 'vertical' : 'horizontal'}
                         hasIncreased={hasUpvoted}
                         hasDecreased={hasDownvoted}
+                        disabled={isEditing}
                         onIncrease={onUpvote}
                         onDecrease={onDownvote}
                     />
