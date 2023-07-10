@@ -14,11 +14,13 @@ import { DownvoteAction } from './actions/downvote'
 import { editContent, toggleDownvote, toggleUpvote } from '@/lib/comments'
 import Reply from '@/lib/types/reply'
 import { EditAction } from './actions/edit'
+import { DeleteAction } from './actions/delete'
 
 const initialState: RootComment[] = []
 
 type CommentAction =
     | EditAction
+    | DeleteAction
     | UpvoteAction
     | DownvoteAction
     | InitializeAction
@@ -41,6 +43,18 @@ function commentsReducer(
                     ),
                 }
             })
+        }
+        case 'delete': {
+            return state
+                .filter((comment) => comment.id !== action.commentId)
+                .map((comment) => {
+                    return {
+                        ...comment,
+                        replies: comment.replies.filter(
+                            (reply) => reply.id !== action.commentId
+                        ),
+                    }
+                })
         }
         case 'initialize': {
             return [...state, ...action.comments]

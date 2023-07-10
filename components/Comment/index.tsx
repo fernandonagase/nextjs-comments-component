@@ -10,7 +10,8 @@ import upvoteAction from '@/lib/context/comments/actions/upvote'
 import downvoteAction from '@/lib/context/comments/actions/downvote'
 import editAction from '@/lib/context/comments/actions/edit'
 import { editContent, toggleDownvote, toggleUpvote } from '@/lib/comments'
-import { updateComment } from '@/lib/comments-repository'
+import { deleteComment, updateComment } from '@/lib/comments-repository'
+import deleteAction from '@/lib/context/comments/actions/delete'
 
 type CommentProps = {
     comment: BaseComment
@@ -42,7 +43,8 @@ export default function Comment(props: CommentProps) {
     }
 
     function handleDelete() {
-        alert('Comment successfully deleted!')
+        deleteComment(comment.id)
+        commentsDispatch(deleteAction(comment.id))
     }
 
     function onUpvote() {

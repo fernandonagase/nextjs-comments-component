@@ -29,7 +29,16 @@ function updateComment(updatedComment: BaseComment) {
 }
 
 function deleteComment(id: string) {
-    cacheComments(getComments().filter((comment) => comment.id !== id))
+    cacheComments(
+        getComments()
+            .filter((comment) => comment.id !== id)
+            .map((comment) => {
+                return {
+                    ...comment,
+                    replies: comment.replies.filter((reply) => reply.id !== id),
+                }
+            })
+    )
 }
 
 function cacheComments(comments: RootComment[]) {
