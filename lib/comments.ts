@@ -1,4 +1,10 @@
 import BaseComment from './types/comment'
+import Reply from './types/reply'
+import RootComment from './types/root-comment'
+
+function addReply(reply: Reply, comment: RootComment) {
+    return { ...comment, replies: [...comment.replies, reply] }
+}
 
 function editContent(comment: BaseComment, content: string) {
     return {
@@ -53,4 +59,4 @@ function removeDownvote(comment: BaseComment, userId: string) {
     }
 }
 
-export { toggleUpvote, toggleDownvote, editContent }
+export { addReply, toggleUpvote, toggleDownvote, editContent }

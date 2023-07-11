@@ -9,8 +9,13 @@ import { useCommentsDispatch } from '@/lib/context/comments/comments-context'
 import upvoteAction from '@/lib/context/comments/actions/upvote'
 import downvoteAction from '@/lib/context/comments/actions/downvote'
 import editAction from '@/lib/context/comments/actions/edit'
+import replyAction from '@/lib/context/comments/actions/reply'
 import { editContent, toggleDownvote, toggleUpvote } from '@/lib/comments'
-import { deleteComment, updateComment } from '@/lib/comments-repository'
+import {
+    addReply,
+    deleteComment,
+    updateComment,
+} from '@/lib/comments-repository'
 import deleteAction from '@/lib/context/comments/actions/delete'
 
 type CommentProps = {
@@ -32,8 +37,19 @@ export default function Comment(props: CommentProps) {
         setIsReplying((prev) => !prev)
     }
 
-    function handleReply() {
-        alert('Replied with success!')
+    function handleReply(content: string) {
+        const reply = {
+            id: '',
+            content,
+            createdAt: Math.floor(Date.now()),
+            upvoted: [],
+            downvoted: [],
+            user: currentUser,
+            replyingTo: comment.user.username,
+        }
+        const replyWithId = addReply(reply, comment.id)
+        commentsDispatch(replyAction(replyWithId, comment.id))
+
         setIsReplying(false)
     }
 

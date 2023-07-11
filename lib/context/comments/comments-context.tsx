@@ -11,14 +11,23 @@ import RootComment from '../../types/root-comment'
 import { InitializeAction } from './actions/initialize'
 import { UpvoteAction } from './actions/upvote'
 import { DownvoteAction } from './actions/downvote'
-import { editContent, toggleDownvote, toggleUpvote } from '@/lib/comments'
+import {
+    addReply,
+    editContent,
+    toggleDownvote,
+    toggleUpvote,
+} from '@/lib/comments'
 import Reply from '@/lib/types/reply'
 import { EditAction } from './actions/edit'
 import { DeleteAction } from './actions/delete'
+import { AddAction } from './actions/add'
+import { ReplyAction } from './actions/reply'
 
 const initialState: RootComment[] = []
 
 type CommentAction =
+    | AddAction
+    | ReplyAction
     | EditAction
     | DeleteAction
     | UpvoteAction
@@ -29,6 +38,19 @@ function commentsReducer(
     action: CommentAction
 ): RootComment[] {
     switch (action.type) {
+        case 'add': {
+            return [...state, action.comment]
+        }
+        case 'reply': {
+            return state.map((comment) => {
+                return comment.id === action.commentId ||
+                    comment.replies.some(
+                        (reply) => reply.id === action.commentId
+                    )
+                    ? addReply(action.reply, comment)
+                    : comment
+            })
+        }
         case 'edit': {
             return state.map((comment) => {
                 if (comment.id === action.commentId) {

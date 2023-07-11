@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import classNames from 'classnames'
 
 import Avatar from '../Avatar'
@@ -8,13 +9,12 @@ import TextArea from '../TextArea'
 import styles from './styles/add-comment.module.scss'
 import buttonStyles from '@/components/Button/styles/button.module.scss'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
-import { useEffect, useRef } from 'react'
 
 type AddCommentProps = {
     currentUser: User
     isReplying?: boolean
     autofocus?: boolean
-    onSubmit: () => void
+    onSubmit: (comment: string) => void
 }
 
 export default function AddComment(props: AddCommentProps) {
@@ -34,7 +34,10 @@ export default function AddComment(props: AddCommentProps) {
             className={styles.commentForm}
             onSubmit={(e) => {
                 e.preventDefault()
-                onSubmit()
+                if (!textAreaRef.current) return
+
+                onSubmit(textAreaRef.current.value)
+                textAreaRef.current.value = ''
             }}
         >
             {isLargerThan1440 && (
@@ -48,6 +51,7 @@ export default function AddComment(props: AddCommentProps) {
                     <TextArea
                         placeholder="Add a comment..."
                         id="add-comment-textarea"
+                        required
                         ref={textAreaRef}
                     ></TextArea>
                 </FormControl>

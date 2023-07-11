@@ -3,6 +3,7 @@ import ApiComment from '@/app/api/lib/types/comment'
 import mapUser from './util/map-user'
 import BaseComment from './types/comment'
 import RootComment from './types/root-comment'
+import Reply from './types/reply'
 
 async function fetchData(): Promise<RootComment[]> {
     const data = await fetch('/api/comments')
@@ -36,7 +37,11 @@ async function getComments() {
 }
 
 function addComment(comment: RootComment) {
-    commentsDao.addComment(comment)
+    return commentsDao.addComment(comment)
+}
+
+function addReply(reply: Reply, commentId: string) {
+    return commentsDao.addReply(reply, commentId)
 }
 
 function updateComment(comment: BaseComment) {
@@ -47,4 +52,4 @@ function deleteComment(id: string) {
     commentsDao.deleteComment(id)
 }
 
-export { getComments, addComment, updateComment, deleteComment }
+export { getComments, addComment, addReply, updateComment, deleteComment }
