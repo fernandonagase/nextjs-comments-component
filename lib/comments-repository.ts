@@ -16,10 +16,12 @@ function adaptComment(comment: ApiComment) {
         ...comment,
         id: `${comment.id}`,
         user: mapUser(comment.user),
+        createdAt: Date.now() - comment.createdAt,
         replies: comment.replies.map((reply) => ({
             ...reply,
             id: `${reply.id}`,
             user: mapUser(reply.user),
+            createdAt: Date.now() - reply.createdAt,
         })),
     }
 }

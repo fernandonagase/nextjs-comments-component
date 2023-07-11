@@ -2,6 +2,7 @@ import { getCreatedAtString } from '@/lib/util/getCreatedAtString'
 import Avatar from '../Avatar'
 import Tag from '../Tag'
 import styles from './styles/comment-header.module.scss'
+import { useEffect, useState } from 'react'
 
 type CommentHeaderProps = {
     username: string
@@ -11,7 +12,12 @@ type CommentHeaderProps = {
 }
 
 export default function CommentHeader(props: CommentHeaderProps) {
-    const { isOwnedByUser = false } = props
+    const { createdAt, isOwnedByUser = false } = props
+    const [createdAtString, setCreatedAtString] = useState('')
+
+    useEffect(() => {
+        setCreatedAtString(getCreatedAtString(createdAt))
+    }, [createdAt])
 
     return (
         <header className={styles.commentHeader}>
@@ -22,7 +28,7 @@ export default function CommentHeader(props: CommentHeaderProps) {
                 </span>
                 {isOwnedByUser && <Tag text="you" />}
             </div>
-            <span>{getCreatedAtString(props.createdAt)}</span>
+            <span>{createdAtString}</span>
         </header>
     )
 }

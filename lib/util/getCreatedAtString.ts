@@ -1,35 +1,39 @@
-const minuteInSeconds = 60
-const hourInSeconds = 3600
-const dayInSeconds = 86400
-const weekInSeconds = 604800
-const monthInSeconds = 2419200
-const yearInSeconds = 29030400
+const secondInMillis = 1000
+const minuteInMillis = 60000
+const hourInMillis = 3600000
+const dayInMillis = 86400000
+const weekInMillis = 604800000
+const monthInMillis = 2419200000
+const yearInMillis = 29030400000
 
-// timestamp in seconds
 export function getCreatedAtString(timestamp: number) {
-    let finalUnit = 'second'
-    let conversionDenominator = 1
+    const interval = Date.now() - timestamp
 
-    if (timestamp >= minuteInSeconds && timestamp < hourInSeconds) {
-        conversionDenominator = minuteInSeconds
+    if (interval < secondInMillis) return 'now'
+
+    let finalUnit = 'second'
+    let conversionDenominator = 1000
+
+    if (interval >= minuteInMillis && interval < hourInMillis) {
+        conversionDenominator = minuteInMillis
         finalUnit = 'minute'
-    } else if (timestamp >= hourInSeconds && timestamp < dayInSeconds) {
-        conversionDenominator = hourInSeconds
+    } else if (interval >= hourInMillis && interval < dayInMillis) {
+        conversionDenominator = hourInMillis
         finalUnit = 'hour'
-    } else if (timestamp >= dayInSeconds && timestamp < weekInSeconds) {
-        conversionDenominator = dayInSeconds
+    } else if (interval >= dayInMillis && interval < weekInMillis) {
+        conversionDenominator = dayInMillis
         finalUnit = 'day'
-    } else if (timestamp >= weekInSeconds && timestamp < monthInSeconds) {
-        conversionDenominator = weekInSeconds
+    } else if (interval >= weekInMillis && interval < monthInMillis) {
+        conversionDenominator = weekInMillis
         finalUnit = 'week'
-    } else if (timestamp >= monthInSeconds && timestamp < yearInSeconds) {
-        conversionDenominator = monthInSeconds
+    } else if (interval >= monthInMillis && interval < yearInMillis) {
+        conversionDenominator = monthInMillis
         finalUnit = 'month'
-    } else if (timestamp >= yearInSeconds) {
+    } else if (interval >= yearInMillis) {
         return 'More than one year ago'
     }
 
-    const finalValue = Math.floor(timestamp / conversionDenominator)
+    const finalValue = Math.floor(interval / conversionDenominator)
     if (finalValue > 1) {
         finalUnit = `${finalUnit}s`
     }
