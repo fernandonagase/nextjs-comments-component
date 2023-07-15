@@ -24,7 +24,11 @@
         color: hsl(239, 57%, 85%);
         transition: color 300ms;
 
-        &:hover {
+        &:hover:not(:disabled) {
+            color: hsl(238, 40%, 52%);
+        }
+
+        &[aria-pressed='true'] {
             color: hsl(238, 40%, 52%);
         }
     }

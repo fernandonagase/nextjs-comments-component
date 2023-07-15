@@ -1,9 +1,9 @@
 import Comment from '../Comment'
-import CommentType from '../Comment/types/comment'
+import RootComment from '@/lib/types/root-comment'
 import styles from './styles/comment-thread.module.scss'
 
 type CommentThreadProps = {
-    comment: CommentType
+    comment: RootComment
     className?: string
 }
 
@@ -18,7 +18,6 @@ export default function CommentThread(props: CommentThreadProps) {
                         <Comment
                             comment={reply}
                             replyingTo={reply.replyingTo}
-                            className={styles.commentThread__reply}
                             key={reply.id}
                         />
                     ))}

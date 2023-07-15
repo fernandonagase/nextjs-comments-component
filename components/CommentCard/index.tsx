@@ -1,183 +1,155 @@
-import classNames from 'classnames'
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
+import CommentHeader from './comment-header'
 
 import styles from './styles/comment-card.module.scss'
+import CommentAction from './comment-action'
 import CommentBody from './comment-body'
-import User from '../CommentComponent/types/user'
-import { useCurrentUser } from '../CommentComponent/user-context'
-import TextArea from '../TextArea'
-import Button from '../Button'
-import buttonStyles from '../Button/styles/button.module.scss'
-import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import ScoreControl from '../ScoreControl'
-import IconButton from '../IconButton'
-import { DeleteIcon, EditIcon, ReplyIcon } from './icons'
-import iconButtonStyles from '@/components/IconButton/styles/icon-button.module.scss'
-import Avatar from '../Avatar'
-import Tag from '../Tag'
-
-type AuthorizedActionsProps = {
-    disabled: boolean
-    onToggleEdit: () => void
-    onToggleDelete: () => void
-}
-
-function AuthorizedActions(props: AuthorizedActionsProps) {
-    return (
-        <div className={styles.commentCard__buttons}>
-            <IconButton
-                type="button"
-                icon={<DeleteIcon />}
-                disabled={props.disabled}
-                className={iconButtonStyles['iconButton--danger']}
-                onClick={props.onToggleDelete}
-            >
-                Delete
-            </IconButton>
-            <IconButton
-                type="button"
-                icon={<EditIcon />}
-                className={iconButtonStyles['iconButton--primary']}
-                onClick={props.onToggleEdit}
-            >
-                Edit
-            </IconButton>
-        </div>
-    )
-}
-
-type UnauthorizedActionsProps = {
-    isReplying: boolean
-    commentId: number
-    onToggleReply: () => void
-}
-
-function UnauthorizedActions(props: UnauthorizedActionsProps) {
-    return (
-        <IconButton
-            type="button"
-            aria-expanded={props.isReplying}
-            aria-controls={`reply-comment-${props.commentId}`}
-            className={iconButtonStyles['iconButton--primary']}
-            icon={<ReplyIcon />}
-            onClick={props.onToggleReply}
-        >
-            Reply
-        </IconButton>
-    )
-}
+import User from '@/lib/types/user'
+import AlertDialog from '../AlertDialog'
+import AlertDialogHeader from '../AlertDialog/alertdialog-header'
+import AlertDialogBody from '../AlertDialog/alertdialog-body'
+import Button from '../Button'
+import useModal from '../AlertDialog/hooks/useModal'
+import { useState } from 'react'
 
 type CommentCardProps = {
-    id: number
-    body: string
+    commentId: string
     author: User
     score: number
-    publishedAt: string
+    timestamp: number
+    content: string
+    isReplying: boolean
+    hasUpvoted: boolean
+    hasDownvoted: boolean
     replyingTo?: string
-    isReplying?: boolean
-    isEditing?: boolean
-    isDeleting?: boolean
+    isOwnedByUser?: boolean
     onToggleReply: () => void
-    onToggleEdit: () => void
-    onEdit: () => void
-    onToggleDelete: () => void
+    onEdit: (content: string) => void
+    onDelete: () => void
+    onUpvote: () => void
+    onDownvote: () => void
 }
 
-export default function CommentCard(props: CommentCardProps) {
-    const {
-        onToggleReply,
-        onToggleEdit,
-        onEdit,
-        onToggleDelete,
-        isReplying = false,
-        isEditing = false,
-        isDeleting = false,
-        ...comment
-    } = props
-
-    const currentUser = useCurrentUser()
-    const isOwnedByUser = currentUser.username === props.author.username
-
+export default function CommentCard({
+    commentId,
+    author,
+    score,
+    timestamp,
+    content,
+    isReplying,
+    hasUpvoted,
+    hasDownvoted,
+    replyingTo,
+    isOwnedByUser = false,
+    onToggleReply,
+    onEdit,
+    onDelete,
+    onUpvote,
+    onDownvote,
+}: CommentCardProps) {
     const isLargerThan1440 = useMediaQuery('screen and (min-width: 1440px)')
 
+    const [isEditing, setIsEditing] = useState(false)
+    const deleteModal = useModal()
+
+    function handleToggleEdit() {
+        setIsEditing((prev) => !prev)
+    }
+
     return (
-        <article className={styles.commentCard}>
-            {isLargerThan1440 && (
-                <ScoreControl count={comment.score} direction="vertical" />
-            )}
-            <div className={styles.commentCard__mainContent}>
-                <div>
-                    <header className={styles.commentCard__header}>
-                        <Avatar pictureUrl={comment.author.avatarUrl} />
-                        <div className={styles.commentCard__usernameContainer}>
-                            <span className={styles.commentCard__username}>
-                                {comment.author.username}
-                            </span>
-                            {isOwnedByUser && <Tag text="you" />}
-                        </div>
-                        <span>{comment.publishedAt}</span>
+        <>
+            <article className={styles.commentCard}>
+                <div className={styles.commentCard__content}>
+                    <div className={styles.commentCard__head}>
+                        <CommentHeader
+                            username={author.username}
+                            profilePictureUrl={author.profilePictureUrl}
+                            createdAt={timestamp}
+                            isOwnedByUser={isOwnedByUser}
+                        />
                         {isLargerThan1440 && (
-                            <div className={styles.commentCard__headerActions}>
-                                {isOwnedByUser ? (
-                                    <AuthorizedActions
-                                        disabled={isEditing}
-                                        onToggleEdit={onToggleEdit}
-                                        onToggleDelete={onToggleDelete}
-                                    />
-                                ) : (
-                                    <UnauthorizedActions
-                                        isReplying={isReplying}
-                                        commentId={comment.id}
-                                        onToggleReply={onToggleReply}
-                                    />
-                                )}
+                            <div className={styles.commentCard__buttons}>
+                                <CommentAction
+                                    commentId={commentId}
+                                    isReplying={isReplying}
+                                    isOwnedByUser={isOwnedByUser}
+                                    disabled={isEditing}
+                                    onToggleDelete={deleteModal.open}
+                                    onToggleEdit={handleToggleEdit}
+                                    onToggleReply={onToggleReply}
+                                />
                             </div>
                         )}
-                    </header>
-                    {isEditing ? (
-                        <form className={styles.commentCard__editForm}>
-                            <TextArea>{comment.body}</TextArea>
-                            <Button
-                                type="submit"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    onEdit()
-                                    onToggleEdit()
-                                }}
-                                className={classNames([
-                                    styles.commentCard__updateButton,
-                                    buttonStyles['button--rounded'],
-                                    buttonStyles['button--primary'],
-                                ])}
-                            >
-                                Update
-                            </Button>
-                        </form>
-                    ) : (
-                        <CommentBody
-                            content={comment.body}
-                            replyingTo={comment.replyingTo}
-                        />
-                    )}
+                    </div>
+                    <CommentBody
+                        content={content}
+                        replyingTo={replyingTo}
+                        isEditing={isEditing}
+                        onToggleEdit={handleToggleEdit}
+                        onEdit={onEdit}
+                    />
+                </div>
+                <div className={styles.commentCard__score}>
+                    <ScoreControl
+                        count={score}
+                        direction={isLargerThan1440 ? 'vertical' : 'horizontal'}
+                        hasIncreased={hasUpvoted}
+                        hasDecreased={hasDownvoted}
+                        disabled={isEditing}
+                        onIncrease={onUpvote}
+                        onDecrease={onDownvote}
+                    />
                 </div>
                 {!isLargerThan1440 && (
-                    <div className={styles.commentCard__action}>
-                        <ScoreControl count={comment.score} />
-                        {isOwnedByUser ? (
-                            <AuthorizedActions
-                                disabled={isEditing}
-                                onToggleEdit={onToggleEdit}
-                                onToggleDelete={onToggleDelete}
-                            />
-                        ) : (
-                            <UnauthorizedActions
-                                isReplying={isReplying}
-                                commentId={comment.id}
-                                onToggleReply={onToggleReply}
-                            />
-                        )}
+                    <div className={styles.commentCard__mobileActions}>
+                        <CommentAction
+                            commentId={commentId}
+                            isReplying={isReplying}
+                            isOwnedByUser={isOwnedByUser}
+                            disabled={isEditing}
+                            onToggleDelete={deleteModal.open}
+                            onToggleEdit={handleToggleEdit}
+                            onToggleReply={onToggleReply}
+                        />
                     </div>
                 )}
-            </div>
-        </article>
+            </article>
+            <AlertDialog
+                isOpen={deleteModal.isOpen}
+                onClose={deleteModal.close}
+            >
+                <AlertDialogHeader>Delete comment</AlertDialogHeader>
+                <AlertDialogBody>
+                    <p>
+                        Are you sure you want to delete this comment? This will
+                        remove the comment and can&apos;t be undone.
+                    </p>
+                </AlertDialogBody>
+                <div className={styles.commentCard__alertButtons}>
+                    <Button
+                        type="button"
+                        variant="rounded"
+                        color="secondary"
+                        onClick={() => {
+                            deleteModal.close()
+                        }}
+                    >
+                        No, cancel
+                    </Button>
+                    <Button
+                        type="button"
+                        variant="rounded"
+                        color="danger"
+                        onClick={() => {
+                            onDelete()
+                            deleteModal.close()
+                        }}
+                    >
+                        Yes, delete
+                    </Button>
+                </div>
+            </AlertDialog>
+        </>
     )
 }

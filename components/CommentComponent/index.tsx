@@ -1,37 +1,44 @@
 import AddComment from '../AddComment'
-import CommentType from '../Comment/types/comment'
+import RootComment from '@/lib/types/root-comment'
+import { useCurrentUser } from '@/lib/context/user-context'
 import CommentThread from '../CommentThread'
-import User from './types/user'
-import UserContext from './user-context'
 import styles from './styles/comment-component.module.scss'
+import { addComment } from '@/lib/comments-repository'
+import { useCommentsDispatch } from '@/lib/context/comments/comments-context'
+import addAction from '@/lib/context/comments/actions/add'
 
 type CommentComponentProps = {
-    comments: CommentType[]
-    currentUser: User
+    comments: RootComment[]
 }
 
 export default function CommentComponent(props: CommentComponentProps) {
-    function handleComment() {
-        alert('Commented with success!')
+    const currentUser = useCurrentUser()
+    const commentsDispatch = useCommentsDispatch()
+
+    function handleComment(content: string) {
+        const comment = {
+            id: '',
+            content,
+            createdAt: Math.floor(Date.now()),
+            upvoted: [],
+            downvoted: [],
+            user: currentUser,
+            replies: [],
+        }
+        const commentWithId = addComment(comment)
+        commentsDispatch(addAction(commentWithId))
     }
 
     return (
-        <UserContext.Provider value={props.currentUser}>
-            <div>
-                <div>
-                    {props.comments.map((comment) => (
-                        <CommentThread
-                            comment={comment}
-                            className={styles.commentComponent__thread}
-                            key={comment.id}
-                        />
-                    ))}
-                </div>
-                <AddComment
-                    currentUser={props.currentUser}
-                    onSubmit={handleComment}
+        <div>
+            {props.comments.map((comment) => (
+                <CommentThread
+                    comment={comment}
+                    className={styles.commentComponent__thread}
+                    key={comment.id}
                 />
-            </div>
-        </UserContext.Provider>
+            ))}
+            <AddComment currentUser={currentUser} onSubmit={handleComment} />
+        </div>
     )
 }

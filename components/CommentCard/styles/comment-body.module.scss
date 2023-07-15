@@ -1,0 +1,25 @@
+.commentBody {
+    &__body {
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+    }
+
+    &__editForm {
+        padding-block: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .commentBody {
+        &__body {
+            margin-block-end: 0;
+        }
+
+        &__updateButton {
+            align-self: flex-end;
+        }
+    }
+}

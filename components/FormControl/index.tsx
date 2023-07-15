@@ -11,7 +11,12 @@ type FormControl = {
 export default function FormControl(props: FormControl) {
     return (
         <div className={styles.formControl}>
-            <label htmlFor={props.inputId}>{props.label}</label>
+            <label
+                htmlFor={props.inputId}
+                className={styles.formControl__label}
+            >
+                {props.label}
+            </label>
             {props.children}
         </div>
     )

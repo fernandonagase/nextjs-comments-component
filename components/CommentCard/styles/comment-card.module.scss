@@ -1,47 +1,30 @@
 .commentCard {
     padding: 16px;
     border-radius: 12px;
-    background-color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     line-height: 1.5;
+    background-color: hsl(0, 0%, 100%);
     color: hsl(211, 10%, 45%);
 
-    &__header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
+    &__content {
+        width: 100%;
     }
 
-    &__username {
-        font-weight: 500;
-        color: hsl(212, 24%, 26%);
-    }
-
-    &__usernameContainer {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    &__headerActions {
-        margin-left: auto;
-    }
-
-    &__body {
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-    }
-
-    &__editForm {
-        padding-block: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    &__action {
+    &__head {
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    &__mobileActions {
+        margin-left: auto;
+    }
+
+    &__alertButtons {
+        display: flex;
+        gap: 16px;
     }
 }
 
@@ -50,25 +33,21 @@ $cardSpacingDesktop: 24px;
 @media screen and (min-width: 1440px) {
     .commentCard {
         padding: $cardSpacingDesktop;
-        display: flex;
+        flex-wrap: nowrap;
         align-items: flex-start;
         gap: $cardSpacingDesktop;
-
-        &__body {
-            margin-block-end: 0;
-        }
 
         &__buttons {
             display: flex;
             gap: 16px;
         }
 
-        &__mainContent {
-            width: 100%;
+        &__score {
+            order: 1;
         }
 
-        &__updateButton {
-            align-self: flex-end;
+        &__content {
+            order: 2;
         }
     }
 }
