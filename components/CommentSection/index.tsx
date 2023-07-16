@@ -23,9 +23,7 @@ export default function CommentSection() {
 
     useEffect(() => {
         async function fetchUser() {
-            setIsLoading(true)
             setCurrentUser(await getCurrentUser())
-            setIsLoading(false)
         }
         fetchUser()
     }, [])
@@ -38,6 +36,8 @@ export default function CommentSection() {
         }
         fetchComments()
     }, [commentsDispatch])
+
+    if (!currentUser) return <p>Fazendo login...</p>
 
     return (
         <UserContext.Provider value={currentUser}>
