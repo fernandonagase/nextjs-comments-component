@@ -1,117 +1,208 @@
-# Frontend Mentor - Interactive comments section solution
+# Solução do desafio "Interactive comments section" - Frontend Mentor
 
-This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+Repositório com a minha solução para o desafio [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Os desafios do Frontend Mentor ajudam a melhorar suas habilidades de programação por meio de projetos realísticos.
 
-## Table of contents
+You can also read this [README in english](./README-en.md).
 
--   [Overview](#overview)
-    -   [The challenge](#the-challenge)
+## Conteúdo
+
+-   [Visão geral](#visão-geral)
+    -   [Sobre o desafio](#sobre-o-desafio)
     -   [Screenshot](#screenshot)
     -   [Links](#links)
--   [My process](#my-process)
-    -   [Built with](#built-with)
-    -   [What I learned](#what-i-learned)
-    -   [Continued development](#continued-development)
-    -   [Useful resources](#useful-resources)
--   [Author](#author)
--   [Acknowledgments](#acknowledgments)
+-   [Sobre o desenvolvimento](#sobre-o-desenvolvimento)
+    -   [Práticas e Tecnologias](#práticas-e-tecnologias)
+    -   [O que eu aprendi](#o-que-eu-aprendi)
+    -   [Oportunidades futuras](#oportunidades-futuras)
+    -   [Recursos úteis](#recursos-úteis)
+-   [Sobre o autor](#sobre-o-autor)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+## Visão geral
 
-## Overview
+### Sobre o desafio
 
-### The challenge
+Os usuários devem ser capazes de:
 
-Users should be able to:
-
--   View the optimal layout for the app depending on their device's screen size
--   See hover states for all interactive elements on the page
--   Create, Read, Update, and Delete comments and replies
--   Upvote and downvote comments
--   **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
--   **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted.
+-   Visualizar o melhor layout para o app de acordo com o tamanho da tela de cada dispositivo;
+-   Visualizar estados de "hover" para todos os elementos interativos na página;
+-   Criar, ler, atualizar e remover comentários e respostas;
+-   Votar positivamente (upvote) ou negativamente (downvote) os comentários;
+-   **Bônus**: caso o seu projeto seja apenas front-end, use `localStorage` para salvar o estado atual da aplicação no navegador, de modo que ele persista em diferentes visitas às páginas;
+-   **Bônus**: em vez de utilizar as strings `createdAt` originais do arquivo `data.json`, tente utilizar timestamps para gerenciar dinamicamente o tempo desde a publicação do comentário ou resposta.
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![Layout do desafio finalizado](./project/screenshot.png)
 
 ### Links
 
--   Solution URL: [Add solution URL here](https://your-solution-url.com)
--   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+-   [URL do desafio pronto](https://ngsfer-nextjs-comments.vercel.app/)
 
-## My process
+## Sobre o desenvolvimento
 
-### Built with
+### Práticas e Tecnologias
 
--   Semantic HTML5 markup
--   CSS custom properties
--   Flexbox
--   CSS Grid
--   Mobile-first workflow
--   [React](https://reactjs.org/) - JS library
--   [Next.js](https://nextjs.org/) - React framework
--   [Styled Components](https://styled-components.com/) - For styles
+-   HTML semântico
+-   Atributos ARIA
+-   Workflow Mobile-first
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [React](https://reactjs.org/)
+-   [Next.js](https://nextjs.org/)
+-   [Sass](https://sass-lang.com/)
+-   [Normalize.css](https://necolas.github.io/normalize.css/)
+-   [react-focus-lock](https://github.com/theKashey/react-focus-lock)
+-   [ESLint](https://eslint.org/)
+-   [Prettier](https://prettier.io/)
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+### O que eu aprendi
 
-### What I learned
+Algumas oportunidades que me permitiram aprender e reforçar conteúdos durante a resolução deste desafio.
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+#### API "App Router" [introduzida pelo Next.js 13](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration)
 
-To see how you can add code snippets, see below:
+Meu primeiro contato com o Next.js ocorreu durante um período de migração da API "Pages Router" para "App Router", com o lançamento da versão 13.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
+Desde então, estive desenvolvendo meu site ([ngsfer.com](https://ngsfer.com)) utilizando a API antiga, e optei por mantê-la até a finalização do projeto. Com este desafio, pude obter uma noção sobre como será o futuro processo de migração.
 
-```css
-.proud-of-this-css {
-    color: papayawhip;
+#### Alert dialogs acessíveis
+
+Tenho desenvolvido certo interesse de criar minha própria biblioteca de componentes reutilizáveis. Com este estudo sobre alert dialogs acessíveis, pude ter um breve "gostinho" sobre os desafios que enfrentarei.
+
+```tsx
+// Exemplo de código extraído do arquivo /components/AlertDialog/alertdialog-content.tsx
+
+import React from 'react'
+import { ReactNode } from 'react'
+import FocusLock from 'react-focus-lock'
+
+import styles from './styles/alert-dialog.module.scss'
+
+type AlertDialogContentProps = {
+    children: ReactNode
+    onClose: () => void
+}
+
+export default function AlertDialogContent({
+    children,
+    onClose,
+}: AlertDialogContentProps) {
+    function handleEsc(event: React.KeyboardEvent) {
+        const pressedEsc = event.key === 'Escape'
+        if (pressedEsc) onClose()
+    }
+
+    return (
+        <FocusLock returnFocus>
+            <div
+                role="alertdialog"
+                aria-modal="true"
+                aria-labelledby="alertdialog-header"
+                aria-describedby="alertdialog-body"
+                onKeyDown={handleEsc}
+                tabIndex={-1}
+                className={styles.alertDialog__content}
+            >
+                {children}
+            </div>
+        </FocusLock>
+    )
 }
 ```
 
-```js
-const proudOfThisFunc = () => {
-    console.log('🎉')
+#### Hook useMediaQuery para acompanhar o breakpoint atual "programaticamente"
+
+Sempre utilizei as soluções prontas, oferecidas por bibliotecas como Chakra UI e Material UI, para lidar com media queries em JavaScript. Neste projeto, aprendi sobre a existência da função `matchMedia` e a apliquei, na forma de um _hook_ do React, para satisfazer essa mesma responsabilidade.
+
+```tsx
+// Exemplo de código extraído do arquivo /lib/hooks/useMediaQuery.ts
+
+import { useEffect, useState } from 'react'
+
+function useMediaQuery(query: string) {
+    const [matches, setMatches] = useState(false)
+
+    useEffect(() => {
+        const media = matchMedia(query)
+        setMatches(media.matches)
+
+        function synchronizeMediaMatch(event: MediaQueryListEvent) {
+            setMatches(event.matches)
+        }
+
+        media.addEventListener('change', synchronizeMediaMatch)
+        return () => {
+            media.removeEventListener('change', synchronizeMediaMatch)
+        }
+    }, [query])
+
+    return matches
 }
+
+export { useMediaQuery }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+#### Abordagem [Context-Reducer](https://react.dev/learn/scaling-up-with-reducer-and-context) em React
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+Desde que aprendi sobre a possibilidade dessa abordagem na base de conhecimento do React, tive vontade de experimentá-la em algum projeto, o que se concretizou na implementação deste desafio.
 
-### Continued development
+```tsx
+// Exemplo de código extraído do arquivo /lib/context/comments/comments-context.tsx
+// ...
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+const CommentsContext = createContext<typeof initialState>([])
+const CommentsDispatchContext = createContext<Dispatch<CommentAction> | null>(
+    null
+)
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+type CommentsProviderProps = {
+    children: ReactNode
+}
+function CommentsProvider({ children }: CommentsProviderProps) {
+    const [comments, dispatch] = useReducer(commentsReducer, initialState)
 
-### Useful resources
+    return (
+        <CommentsContext.Provider value={comments}>
+            <CommentsDispatchContext.Provider value={dispatch}>
+                {children}
+            </CommentsDispatchContext.Provider>
+        </CommentsContext.Provider>
+    )
+}
 
--   [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
--   [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+// ...
+```
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+### Oportunidades futuras
 
-## Author
+Assuntos que desejo continuar praticando em projetos futuros, sejam conceitos com os quais ainda não me sinto confortável, sejam técnicas as quais não domino completamente e gostaria de refinar.
 
--   Website - [Add your name here](https://www.your-site.com)
--   Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
--   Twitter - [@yourusername](https://www.twitter.com/yourusername)
+-   **Organização do projeto**: gostaria de ter separado melhor as diferentes camadas da aplicação, que muitas vezes se entrelaçaram dentro do projeto. Acredito que essa organização poderia ter sido melhor ao realizar uma divisão tanto em nível de diretórios quanto em nível de pacotes;
+-   **Qualidade de código**: reconheço que algumas funcionalidades poderiam ter sido
+    implementadas de forma mais eficiente e organizada;
+-   **Recursos do Next.js**: apesar de ter sido introduzido à nova API introduzida pela versão 13 do Next.js,
+    há muitos recursos importantíssimos com os quais ainda não entrei em contato, como o novo sistema de fetching;
+-   **Acessibilidade**: apesar de ter **tentado** utilizar as tags HTML semânticas e atributos ARIA corretamente, devo garantir que esses recursos não se tornem um [empecilho de acessibilidade](https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/#noariaisbetterthanbadaria);
+-   **Polimento de componentes reutilizáveis**: durante o desenvolvimento deste projeto, implementei alguns componentes de forma interna, como o Alert Dialog, Icon Button, Tag etc. Futuramente, pretendo implementá-los
+    em um pacote separado, na forma de uma biblioteca de componentes reutilizáveis, e garantindo maior qualidade (acessibilidade, usabilidade etc.)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+### Recursos úteis
 
-## Acknowledgments
+-   Alert Dialog acessíveis
+    -   ["Dialog (Modal) Pattern" em ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/);
+    -   ["Alert and Message Dialogs Pattern" em ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/);
+    -   ["Using JavaScript to trap focus in an element" por Hidde de Vries](https://hidde.blog/using-javascript-to-trap-focus-in-an-element/) (embora eu tenha optado por utilizar o pacote `react-focus-lock`,
+        este artigo me ofereceu insights sobre o funcionamento do "focus trap" dentro de um elemento);
+-   React
+    -   ["Scaling Up with Reducer and Context" em react.dev](https://react.dev/learn/scaling-up-with-reducer-and-context)
+    -   ["Hooks" em React TypeScript Cheatsheets](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks)
+-   Responsividade
+    -   ["Window: matchMedia() method" em MDN](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
+    -   ["Working with JavaScript Media Queries" por Marko Ilic](https://css-tricks.com/working-with-javascript-media-queries/)
+-   Sass
+    -   ["@use" em sass-lang.com](https://sass-lang.com/documentation/at-rules/use/)
+    -   ["@mixin and @include" em sass-lang.com](https://sass-lang.com/documentation/at-rules/mixin/)
+    -   ["@each" em sass-lang.com](https://sass-lang.com/documentation/at-rules/control/each/)
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+## Sobre o autor
 
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+-   [ngsfer.com](https://ngsfer.com/) (website)
