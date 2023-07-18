@@ -2,6 +2,8 @@
 
 Repositório com a minha solução para o desafio [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Os desafios do Frontend Mentor ajudam a melhorar suas habilidades de programação por meio de projetos realísticos.
 
+You can also read this [README in english](./README-en.md).
+
 ## Conteúdo
 
 -   [Visão geral](#visão-geral)
